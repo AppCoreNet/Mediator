@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+    <Description>Authentication abstractions for AppCore .NET mediator.</Description>
+    <RootNamespace>AppCoreNet.Mediator</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AppCoreNet.Mediator.Abstractions\AppCoreNet.Mediator.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

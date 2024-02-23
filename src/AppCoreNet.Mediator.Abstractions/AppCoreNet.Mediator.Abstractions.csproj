@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+    <RootNamespace>AppCoreNet.Mediator</RootNamespace>
+    <Description>Provides AppCore .NET abstractions for the mediator.</Description>
+  </PropertyGroup>
+
+</Project>
