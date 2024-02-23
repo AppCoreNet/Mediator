@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AppCore.EventModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Represents a resolver for <see cref="IEventPipeline"/> instances.

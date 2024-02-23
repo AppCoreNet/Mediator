@@ -3,11 +3,10 @@
 
 using System;
 using System.Collections.Concurrent;
-using AppCore.EventModel.Metadata;
-using AppCoreNet;
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Mediator.Metadata;
 
-namespace AppCore.EventModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 using EventContextFactoryDelegate = Func<EventDescriptor, IEvent, IEventContext>;
 

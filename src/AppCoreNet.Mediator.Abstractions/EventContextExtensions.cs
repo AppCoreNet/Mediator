@@ -2,10 +2,9 @@
 // Copyright (c) 2018 the AppCore .NET project.
 
 using System;
-using AppCoreNet;
 using AppCoreNet.Diagnostics;
 
-namespace AppCore.EventModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Provides extension methods for the <see cref="IEventContext"/>.

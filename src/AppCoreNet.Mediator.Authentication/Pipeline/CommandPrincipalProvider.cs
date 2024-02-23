@@ -4,7 +4,7 @@
 using System.Security.Principal;
 using AppCoreNet.Diagnostics;
 
-namespace AppCore.CommandModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Retrieves the principal from the current command. The command is required to

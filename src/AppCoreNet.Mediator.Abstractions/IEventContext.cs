@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using AppCore.EventModel.Metadata;
+using AppCoreNet.Mediator.Metadata;
 
-namespace AppCore.EventModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Represents the context when processing events.

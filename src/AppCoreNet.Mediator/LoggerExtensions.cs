@@ -2,11 +2,9 @@
 // Copyright (c) 2018,2019 the AppCore .NET project.
 
 using System;
-using AppCoreNet;
 using Microsoft.Extensions.Logging;
 
-// ReSharper disable once CheckNamespace
-namespace AppCore.EventModel;
+namespace AppCoreNet.Mediator;
 
 internal static class LoggerExtensions
 {

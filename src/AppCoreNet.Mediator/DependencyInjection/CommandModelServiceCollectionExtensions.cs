@@ -1,10 +1,10 @@
 // Licensed under the MIT License.
 // Copyright (c) 2018-2021 the AppCore .NET project.
 
-using AppCore.CommandModel;
-using AppCore.CommandModel.Metadata;
-using AppCore.CommandModel.Pipeline;
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Mediator;
+using AppCoreNet.Mediator.Metadata;
+using AppCoreNet.Mediator.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

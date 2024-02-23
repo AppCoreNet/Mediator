@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AppCoreNet.Diagnostics;
 
-namespace AppCore.CommandModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Pipeline behavior which invokes <see cref="IPostCommandHandler{TCommand,TResult}"/>s when the

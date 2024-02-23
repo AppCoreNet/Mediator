@@ -3,7 +3,7 @@
 
 using Microsoft.Extensions.Logging;
 
-namespace AppCore.EventModel;
+namespace AppCoreNet.Mediator;
 
 internal class LogEventIds
 {

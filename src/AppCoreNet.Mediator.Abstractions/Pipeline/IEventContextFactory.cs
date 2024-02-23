@@ -1,9 +1,9 @@
 ﻿// Licensed under the MIT License.
 // Copyright (c) 2019 the AppCore .NET project.
 
-using AppCore.EventModel.Metadata;
+using AppCoreNet.Mediator.Metadata;
 
-namespace AppCore.EventModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Represents a type which instantiates <see cref="IEventContext"/> objects.

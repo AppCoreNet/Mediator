@@ -1,10 +1,10 @@
 ﻿// Licensed under the MIT License.
 // Copyright (c) 2018 the AppCore .NET project.
 
-using AppCore.EventModel.Pipeline;
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Mediator.Pipeline;
 
-namespace AppCore.EventModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Provides extension methods for the <see cref="IEventContext"/> type.

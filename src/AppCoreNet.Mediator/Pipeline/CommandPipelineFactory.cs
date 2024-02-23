@@ -3,10 +3,9 @@
 
 using System;
 using System.Collections.Concurrent;
-using AppCoreNet;
 using AppCoreNet.Extensions.DependencyInjection.Activator;
 
-namespace AppCore.CommandModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 internal static class CommandPipelineFactory
 {
@@ -26,6 +25,6 @@ internal static class CommandPipelineFactory
     public static object CreateCommandPipeline(Type commandType, IActivator activator)
     {
         Type commandPipelineType = GetCommandPipelineType(commandType);
-        return activator.CreateInstance(commandPipelineType);
+        return activator.CreateInstance(commandPipelineType) !;
     }
 }

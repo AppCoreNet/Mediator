@@ -3,9 +3,9 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-using AppCore.CommandModel.Metadata;
+using AppCoreNet.Mediator.Metadata;
 
-namespace AppCore.CommandModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 internal static class CancelableCommandBehavior
 {

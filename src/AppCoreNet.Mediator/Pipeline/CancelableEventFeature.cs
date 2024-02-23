@@ -4,7 +4,7 @@
 using System.Threading;
 using AppCoreNet.Diagnostics;
 
-namespace AppCore.EventModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Implements cancellation support for the <see cref="IEventContext"/>.

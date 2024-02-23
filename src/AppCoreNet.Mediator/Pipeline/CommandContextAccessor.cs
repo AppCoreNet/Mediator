@@ -3,7 +3,7 @@
 
 using System.Threading;
 
-namespace AppCore.CommandModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Default implementation of the <see cref="ICommandContextAccessor"/> interface.

@@ -4,10 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using AppCoreNet;
 using AppCoreNet.Diagnostics;
 
-namespace AppCore.CommandModel.Metadata;
+namespace AppCoreNet.Mediator.Metadata;
 
 /// <summary>
 /// Provides extension methods for the <see cref="CommandDescriptor"/> type.

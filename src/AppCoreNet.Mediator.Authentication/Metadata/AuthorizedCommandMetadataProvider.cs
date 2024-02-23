@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AppCore.CommandModel.Pipeline;
+using AppCoreNet.Mediator.Pipeline;
 
-namespace AppCore.CommandModel.Metadata;
+namespace AppCoreNet.Mediator.Metadata;
 
 /// <summary>
 /// Represents a metadata provider for authorized commands.

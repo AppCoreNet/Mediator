@@ -3,10 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using AppCore.EventModel.Metadata;
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Mediator.Metadata;
 
-namespace AppCore.EventModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Default implementation of the <see cref="IEventContext{TEvent}"/> interface.

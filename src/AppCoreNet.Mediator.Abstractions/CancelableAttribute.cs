@@ -3,12 +3,12 @@
 
 using System;
 
-namespace AppCore.EventModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Enables cancellation for the event type.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class|AttributeTargets.Interface)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
 public class CancelableAttribute : Attribute
 {
 }

@@ -4,7 +4,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AppCore.CommandModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Represents the command processor.

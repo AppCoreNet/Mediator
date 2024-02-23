@@ -4,12 +4,12 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AppCore.CommandModel.Metadata;
-using AppCore.CommandModel.Pipeline;
 using AppCoreNet.Diagnostics;
 using AppCoreNet.Extensions.DependencyInjection.Activator;
+using AppCoreNet.Mediator.Metadata;
+using AppCoreNet.Mediator.Pipeline;
 
-namespace AppCore.CommandModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Provides the default command processor implementation.

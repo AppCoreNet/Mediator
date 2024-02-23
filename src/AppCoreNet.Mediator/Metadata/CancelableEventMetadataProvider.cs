@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AppCore.EventModel.Pipeline;
+using AppCoreNet.Mediator.Pipeline;
 
-namespace AppCore.EventModel.Metadata;
+namespace AppCoreNet.Mediator.Metadata;
 
 /// <summary>
 /// Provides metadata for cancelable events.

@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AppCore.CommandModel.Metadata;
+namespace AppCoreNet.Mediator.Metadata;
 
 /// <summary>
 /// Represents a type which instantiates <see cref="CommandDescriptor"/> objects.

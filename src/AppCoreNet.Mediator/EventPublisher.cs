@@ -4,11 +4,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AppCore.EventModel.Metadata;
-using AppCore.EventModel.Pipeline;
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Mediator.Metadata;
+using AppCoreNet.Mediator.Pipeline;
 
-namespace AppCore.EventModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Provides the default event publisher implementation.

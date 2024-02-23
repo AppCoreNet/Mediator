@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using AppCoreNet.Diagnostics;
 
-namespace AppCore.EventModel.Metadata;
+namespace AppCoreNet.Mediator.Metadata;
 
 /// <summary>
 /// Describes an event type.

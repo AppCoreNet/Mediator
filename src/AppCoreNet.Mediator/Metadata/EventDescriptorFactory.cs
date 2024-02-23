@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AppCoreNet.Diagnostics;
 
-namespace AppCore.EventModel.Metadata;
+namespace AppCoreNet.Mediator.Metadata;
 
 /// <summary>
 /// Creates new <see cref="EventDescriptor"/> instances.

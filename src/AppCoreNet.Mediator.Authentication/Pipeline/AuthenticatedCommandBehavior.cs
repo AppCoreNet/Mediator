@@ -7,10 +7,10 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using AppCore.CommandModel.Metadata;
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Mediator.Metadata;
 
-namespace AppCore.CommandModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 internal class AuthenticatedCommandBehavior
 {

@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AppCore.CommandModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// When applied to a command type, requires authorization of the user.

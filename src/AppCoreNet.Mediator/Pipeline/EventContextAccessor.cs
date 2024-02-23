@@ -9,7 +9,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Threading;
 #endif
 
-namespace AppCore.EventModel.Pipeline
+namespace AppCoreNet.Mediator.Pipeline
 {
     /// <summary>
     /// Default implementation of the <see cref="IEventContextAccessor"/> interface.
@@ -27,6 +27,7 @@ namespace AppCore.EventModel.Pipeline
                 var handle = CallContext.LogicalGetData(_logicalDataKey) as ObjectHandle;
                 return handle?.Unwrap() as IEventContext;
             }
+
             set
             {
                 CallContext.LogicalSetData(_logicalDataKey, new ObjectHandle(value));

@@ -1,10 +1,10 @@
 // Licensed under the MIT License.
 // Copyright (c) 2018-2022 the AppCore .NET project.
 
-using AppCore.EventModel;
-using AppCore.EventModel.Metadata;
-using AppCore.EventModel.Pipeline;
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Mediator;
+using AppCoreNet.Mediator.Metadata;
+using AppCoreNet.Mediator.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

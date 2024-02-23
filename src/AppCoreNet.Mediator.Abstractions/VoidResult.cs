@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AppCore.CommandModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Represents a <see cref="Void"/> command result.

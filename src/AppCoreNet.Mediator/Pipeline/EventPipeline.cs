@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using AppCoreNet.Diagnostics;
 using Microsoft.Extensions.Logging;
 
-namespace AppCore.EventModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Provides the default implementation of <see cref="IEventPipeline{TEvent}"/>.

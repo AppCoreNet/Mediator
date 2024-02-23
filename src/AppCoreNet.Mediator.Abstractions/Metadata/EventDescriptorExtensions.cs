@@ -3,10 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using AppCoreNet;
 using AppCoreNet.Diagnostics;
 
-namespace AppCore.EventModel.Metadata;
+namespace AppCoreNet.Mediator.Metadata;
 
 /// <summary>
 /// Provides extension methods for the <see cref="EventDescriptor"/> type.

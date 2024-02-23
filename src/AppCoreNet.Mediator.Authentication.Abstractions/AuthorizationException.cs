@@ -1,6 +1,6 @@
 using System;
 
-namespace AppCore.CommandModel;
+namespace AppCoreNet.Mediator;
 
 public class AuthorizationException : Exception
 {

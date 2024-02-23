@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using AppCore.CommandModel.Metadata;
+using AppCoreNet.Mediator.Metadata;
 
-namespace AppCore.CommandModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Represents the context when processing a command.

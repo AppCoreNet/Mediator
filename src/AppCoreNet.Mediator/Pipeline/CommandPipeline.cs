@@ -7,9 +7,9 @@ using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
-using AppCore.CommandModel.Metadata;
+using AppCoreNet.Mediator.Metadata;
 
-namespace AppCore.CommandModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 internal class CommandPipeline<TCommand, TResult> : ICommandPipeline<TResult>
     where TCommand : ICommand<TResult>

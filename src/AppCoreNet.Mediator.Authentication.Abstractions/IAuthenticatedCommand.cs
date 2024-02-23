@@ -3,7 +3,7 @@
 
 using System.Security.Principal;
 
-namespace AppCore.CommandModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Represents a command which requires the current principal.

@@ -4,10 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AppCore.CommandModel.Pipeline;
-using AppCore.EventModel;
+using AppCoreNet.Mediator.Pipeline;
 
-namespace AppCore.CommandModel.Metadata;
+namespace AppCoreNet.Mediator.Metadata;
 
 /// <summary>
 /// Provides metadata for cancelable commands.

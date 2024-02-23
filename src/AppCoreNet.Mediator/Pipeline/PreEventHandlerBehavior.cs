@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using AppCoreNet.Diagnostics;
 using Microsoft.Extensions.Logging;
 
-namespace AppCore.EventModel.Pipeline;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Pipeline behavior which invokes <see cref="IPreEventHandler{TEvent}"/>s.

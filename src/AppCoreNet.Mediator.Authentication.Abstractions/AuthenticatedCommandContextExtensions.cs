@@ -2,10 +2,10 @@
 // Copyright (c) 2020 the AppCore .NET project.
 
 using System.Security.Principal;
-using AppCore.CommandModel.Pipeline;
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Mediator.Pipeline;
 
-namespace AppCore.CommandModel;
+namespace AppCoreNet.Mediator;
 
 /// <summary>
 /// Provides authorization related extension methods for the <see cref="ICommandContext"/>.
