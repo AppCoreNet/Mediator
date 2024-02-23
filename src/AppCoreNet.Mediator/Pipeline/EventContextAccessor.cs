@@ -1,5 +1,5 @@
-// Licensed under the MIT License.
-// Copyright (c) 2018-2020 the AppCore .NET project.
+// Licensed under the MIT license.
+// Copyright (c) The AppCore .NET project.
 
 #if !NETSTANDARD2_0
 using System;
