@@ -58,12 +58,12 @@ internal static class LoggerExtensions
 
     public static void PipelineProcessed(this ILogger logger, Type eventType, TimeSpan elapsed)
     {
-        _pipelineProcessed(logger, eventType.GetDisplayName(), (long) elapsed.TotalMilliseconds, null);
+        _pipelineProcessed(logger, eventType.GetDisplayName(), (long)elapsed.TotalMilliseconds, null);
     }
 
     public static void PipelineFailed(this ILogger logger, Type eventType, TimeSpan elapsed, Exception exception)
     {
-        _pipelineFailed(logger, eventType.GetDisplayName(), (long) elapsed.TotalMilliseconds, exception);
+        _pipelineFailed(logger, eventType.GetDisplayName(), (long)elapsed.TotalMilliseconds, exception);
     }
 
     public static void PipelineShortCircuited(this ILogger logger, Type eventType, Type eventPipelineBehavior, TimeSpan elapsed)
@@ -72,7 +72,7 @@ internal static class LoggerExtensions
             logger,
             eventType.GetDisplayName(),
             eventPipelineBehavior.GetDisplayName(),
-            (long) elapsed.TotalMilliseconds,
+            (long)elapsed.TotalMilliseconds,
             null);
     }
 

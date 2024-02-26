@@ -13,18 +13,18 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace AppCore.Extensions.DependencyInjection;
 
 /// <summary>
-/// Provides extensions to register the event model.
+/// Provides extension methods to register event handlers and behaviors.
 /// </summary>
-public static class EventModelBuilderExtensions
+public static class EventMediatorBuilderExtensions
 {
     /// <summary>
     /// Registers the <see cref="IEventContextAccessor"/> with the DI container.
     /// </summary>
-    /// <returns>The <see cref="EventModelBuilderExtensions"/>.</returns>
-    public static IEventModelBuilder AddEventContextAccessor(this IEventModelBuilder builder)
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    public static IMediatorBuilder AddEventContextAccessor(this IMediatorBuilder builder)
     {
         Ensure.Arg.NotNull(builder);
-
         builder.Services.TryAddSingleton<IEventContextAccessor, EventContextAccessor>();
         return builder;
     }
@@ -32,13 +32,13 @@ public static class EventModelBuilderExtensions
     /// <summary>
     /// Adds event handler to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="IEventModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IEventModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
-    public static IEventModelBuilder AddHandler(
-        this IEventModelBuilder builder,
+    public static IMediatorBuilder AddHandler(
+        this IMediatorBuilder builder,
         Type handlerType,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
     {
@@ -54,13 +54,13 @@ public static class EventModelBuilderExtensions
     /// <summary>
     /// Adds event handlers to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="IEventModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IEventModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
-    public static IEventModelBuilder AddHandlersFrom(
-        this IEventModelBuilder builder,
+    public static IMediatorBuilder AddHandlersFrom(
+        this IMediatorBuilder builder,
         Action<IServiceDescriptorReflectionBuilder> configure,
         ServiceLifetime defaultLifetime = ServiceLifetime.Transient)
     {
@@ -81,13 +81,13 @@ public static class EventModelBuilderExtensions
     /// <summary>
     /// Adds event pre-handler to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="IEventModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IEventModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
-    public static IEventModelBuilder AddPreHandler(
-        this IEventModelBuilder builder,
+    public static IMediatorBuilder AddPreHandler(
+        this IMediatorBuilder builder,
         Type handlerType,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
     {
@@ -103,13 +103,13 @@ public static class EventModelBuilderExtensions
     /// <summary>
     /// Adds event pre-handlers to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="IEventModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IEventModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
-    public static IEventModelBuilder AddPreHandlersFrom(
-        this IEventModelBuilder builder,
+    public static IMediatorBuilder AddPreHandlersFrom(
+        this IMediatorBuilder builder,
         Action<IServiceDescriptorReflectionBuilder> configure,
         ServiceLifetime defaultLifetime = ServiceLifetime.Transient)
     {
@@ -130,13 +130,13 @@ public static class EventModelBuilderExtensions
     /// <summary>
     /// Adds event post-handler to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="IEventModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IEventModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
-    public static IEventModelBuilder AddPostHandler(
-        this IEventModelBuilder builder,
+    public static IMediatorBuilder AddPostHandler(
+        this IMediatorBuilder builder,
         Type handlerType,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
     {
@@ -152,13 +152,13 @@ public static class EventModelBuilderExtensions
     /// <summary>
     /// Adds event post-handlers to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="IEventModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IEventModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
-    public static IEventModelBuilder AddPostHandlersFrom(
-        this IEventModelBuilder builder,
+    public static IMediatorBuilder AddPostHandlersFrom(
+        this IMediatorBuilder builder,
         Action<IServiceDescriptorReflectionBuilder> configure,
         ServiceLifetime defaultLifetime = ServiceLifetime.Transient)
     {
@@ -179,13 +179,13 @@ public static class EventModelBuilderExtensions
     /// <summary>
     /// Adds event pipeline behavior to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="IEventModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IEventModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
-    public static IEventModelBuilder AddBehavior(
-        this IEventModelBuilder builder,
+    public static IMediatorBuilder AddBehavior(
+        this IMediatorBuilder builder,
         Type handlerType,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
     {
@@ -201,13 +201,13 @@ public static class EventModelBuilderExtensions
     /// <summary>
     /// Adds event pipeline behaviors to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="IEventModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IEventModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
-    public static IEventModelBuilder AddBehaviorsFrom(
-        this IEventModelBuilder builder,
+    public static IMediatorBuilder AddBehaviorsFrom(
+        this IMediatorBuilder builder,
         Action<IServiceDescriptorReflectionBuilder> configure,
         ServiceLifetime defaultLifetime = ServiceLifetime.Transient)
     {

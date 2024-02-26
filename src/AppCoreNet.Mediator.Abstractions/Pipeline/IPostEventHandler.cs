@@ -19,5 +19,5 @@ public interface IPostEventHandler<in TEvent>
     /// <param name="context">The context of the event that was handled.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous handler operation.</returns>
-    Task OnHandledAsync(IEventContext<TEvent> context, CancellationToken cancellationToken);
+    Task OnHandledAsync(IEventContext<TEvent> context, CancellationToken cancellationToken = default);
 }

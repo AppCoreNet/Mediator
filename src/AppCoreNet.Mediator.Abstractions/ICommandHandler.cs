@@ -20,5 +20,5 @@ public interface ICommandHandler<in TCommand, TResult>
     /// <param name="command">The command that should be handled.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous command operation.</returns>
-    Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken);
+    Task<TResult> HandleAsync(TCommand command, CancellationToken cancellationToken = default);
 }

@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCoreNet.Mediator.Authent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCoreNet.Mediator.Authentication.Abstractions", "src\AppCoreNet.Mediator.Authentication.Abstractions\AppCoreNet.Mediator.Authentication.Abstractions.csproj", "{7FEFEEAD-6485-462E-8E55-D708BE7FB3D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCoreNet.Mediator.Tests", "test\AppCoreNet.Mediator.Tests\AppCoreNet.Mediator.Tests.csproj", "{B9DD158D-1932-4D81-AF54-038D44D9805B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,11 +56,16 @@ Global
 		{7FEFEEAD-6485-462E-8E55-D708BE7FB3D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FEFEEAD-6485-462E-8E55-D708BE7FB3D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FEFEEAD-6485-462E-8E55-D708BE7FB3D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9DD158D-1932-4D81-AF54-038D44D9805B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9DD158D-1932-4D81-AF54-038D44D9805B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9DD158D-1932-4D81-AF54-038D44D9805B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9DD158D-1932-4D81-AF54-038D44D9805B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1D3ED194-5E43-48D9-99E7-316C64D1110E} = {71892011-7C1C-44D4-A5C7-A840F316FB20}
 		{756D0438-9E64-4099-A5E7-A1FFFED091D8} = {71892011-7C1C-44D4-A5C7-A840F316FB20}
 		{9CDE2382-FF78-481B-A34D-7568C13528E5} = {71892011-7C1C-44D4-A5C7-A840F316FB20}
 		{7FEFEEAD-6485-462E-8E55-D708BE7FB3D9} = {71892011-7C1C-44D4-A5C7-A840F316FB20}
+		{B9DD158D-1932-4D81-AF54-038D44D9805B} = {389D2000-F923-42D6-B24F-CF4236B3C722}
 	EndGlobalSection
 EndGlobal

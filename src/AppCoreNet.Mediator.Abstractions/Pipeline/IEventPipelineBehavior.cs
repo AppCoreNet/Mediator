@@ -23,5 +23,5 @@ public interface IEventPipelineBehavior<TEvent>
     Task HandleAsync(
         IEventContext<TEvent> context,
         EventPipelineDelegate<TEvent> next,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 }

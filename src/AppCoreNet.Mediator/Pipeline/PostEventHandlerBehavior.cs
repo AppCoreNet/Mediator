@@ -15,7 +15,7 @@ namespace AppCoreNet.Mediator.Pipeline;
 /// Pipeline behavior which invokes <see cref="IPostEventHandler{TEvent}"/>s.
 /// </summary>
 /// <typeparam name="TEvent">The type of the event that is handled.</typeparam>
-public class PostEventHandlerBehavior<TEvent> : IEventPipelineBehavior<TEvent>
+public sealed class PostEventHandlerBehavior<TEvent> : IEventPipelineBehavior<TEvent>
     where TEvent : IEvent
 {
     private readonly List<IPostEventHandler<TEvent>> _handlers;
@@ -40,7 +40,7 @@ public class PostEventHandlerBehavior<TEvent> : IEventPipelineBehavior<TEvent>
     public async Task HandleAsync(
         IEventContext<TEvent> context,
         EventPipelineDelegate<TEvent> next,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         await next(context, cancellationToken)
             .ConfigureAwait(false);

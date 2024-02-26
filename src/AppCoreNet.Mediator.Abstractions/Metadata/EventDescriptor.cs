@@ -23,7 +23,7 @@ public class EventDescriptor
     public IReadOnlyDictionary<string, object> Metadata { get; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="EventDescriptor"/>.
+    /// Initializes a new instance of the <see cref="EventDescriptor"/> class.
     /// </summary>
     /// <param name="eventType">The type of the event.</param>
     /// <param name="metadata">The event type metadata.</param>

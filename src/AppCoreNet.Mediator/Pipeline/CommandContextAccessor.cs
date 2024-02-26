@@ -8,7 +8,7 @@ namespace AppCoreNet.Mediator.Pipeline;
 /// <summary>
 /// Default implementation of the <see cref="ICommandContextAccessor"/> interface.
 /// </summary>
-public class CommandContextAccessor : ICommandContextAccessor
+public sealed class CommandContextAccessor : ICommandContextAccessor
 {
     private readonly AsyncLocal<ICommandContext?> _commandContext = new AsyncLocal<ICommandContext?>();
 

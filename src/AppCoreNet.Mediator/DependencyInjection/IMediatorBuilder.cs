@@ -8,9 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 namespace AppCore.Extensions.DependencyInjection;
 
 /// <summary>
-/// Provides a builder object for event model services.
+/// Provides a builder object for the mediator.
 /// </summary>
-public interface IEventModelBuilder
+public interface IMediatorBuilder
 {
     /// <summary>
     /// Gets the <see cref="IServiceCollection"/>.

@@ -46,7 +46,7 @@ public static class EventContextExtensions
 
         if (context.Features.TryGetValue(typeof(T), out object? tmp))
         {
-            feature = (T) tmp;
+            feature = (T)tmp;
             return true;
         }
 

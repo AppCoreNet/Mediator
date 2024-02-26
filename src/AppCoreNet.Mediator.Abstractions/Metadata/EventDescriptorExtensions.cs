@@ -38,7 +38,7 @@ public static class EventDescriptorExtensions
                 $"Metadata value with key {key} is not of the expected type {typeof(T).GetDisplayName()}");
         }
 
-        value = (T) tmp;
+        value = (T)tmp;
         return true;
     }
 
@@ -71,7 +71,7 @@ public static class EventDescriptorExtensions
     public static T GetMetadata<T>(this EventDescriptor descriptor, string key)
     {
         if (!TryGetMetadata(descriptor, key, out T? value))
-            throw new InvalidOperationException($"Metadata value with key {key} is unknown.");
+            throw new KeyNotFoundException($"Metadata value with key {key} is unknown.");
 
         return value!;
     }

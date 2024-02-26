@@ -22,26 +22,36 @@ public class CancelableCommandBehavior<TCommand, TResult> : ICommandPipelineBeha
     where TCommand : ICommand<TResult>
 {
     /// <inheritdoc />
-    public async Task ProcessAsync(
+    public async Task HandleAsync(
         ICommandContext<TCommand, TResult> context,
         CommandPipelineDelegate<TCommand, TResult> next,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         bool isCancelable = context.CommandDescriptor.GetMetadata(
             CancelableCommandBehavior.IsCancelableMetadataKey,
             false);
 
-        if (isCancelable)
+        CancellationTokenSource? cts = null;
+        try
         {
-            var cts = new CancellationTokenSource();
-            cancellationToken.Register(() => cts.Cancel());
+            if (isCancelable)
+            {
+                cts = new CancellationTokenSource();
 
-            context.AddFeature<ICancelableCommandFeature>(new CancelableCommandFeature(cts));
-            cancellationToken = cts.Token;
+                // ReSharper disable once AccessToDisposedClosure
+                cancellationToken.Register(() => cts.Cancel());
+
+                context.AddFeature<ICancelableCommandFeature>(new CancelableCommandFeature(cts));
+                cancellationToken = cts.Token;
+            }
+
+            await next(context, cancellationToken)
+                .ConfigureAwait(false);
         }
-
-        await next(context, cancellationToken)
-            .ConfigureAwait(false);
+        finally
+        {
+            cts?.Dispose();
+        }
 
         cancellationToken.ThrowIfCancellationRequested();
     }

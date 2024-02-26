@@ -4,18 +4,18 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AppCoreNet.Mediator;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
-/// Represents the event publisher.
+/// Represents an event pipeline.
 /// </summary>
-public interface IEventPublisher
+public interface IEventPipeline
 {
     /// <summary>
-    /// Publishes an event.
+    /// Processes an event.
     /// </summary>
-    /// <param name="event">The event to publish.</param>
+    /// <param name="event">The event.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous event operation.</returns>
-    Task PublishAsync(IEvent @event, CancellationToken cancellationToken);
+    Task InvokeAsync(IEvent @event, CancellationToken cancellationToken = default);
 }

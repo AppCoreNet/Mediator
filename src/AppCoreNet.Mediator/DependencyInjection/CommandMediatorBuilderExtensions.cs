@@ -15,13 +15,13 @@ namespace AppCore.Extensions.DependencyInjection;
 /// <summary>
 /// Provides extensions to register the command model.
 /// </summary>
-public static class CommandModelBuilderExtensions
+public static class CommandMediatorBuilderExtensions
 {
     /// <summary>
     /// Registers the <see cref="ICommandContextAccessor"/> with the DI container.
     /// </summary>
-    /// <returns>The <see cref="ICommandModelBuilder"/>.</returns>
-    public static ICommandModelBuilder AddCommandContext(this ICommandModelBuilder builder)
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    public static IMediatorBuilder AddCommandContextAccessor(this IMediatorBuilder builder)
     {
         Ensure.Arg.NotNull(builder);
 
@@ -32,13 +32,13 @@ public static class CommandModelBuilderExtensions
     /// <summary>
     /// Adds command handler to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="ICommandModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="ICommandModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
-    public static ICommandModelBuilder AddHandler(
-        this ICommandModelBuilder builder,
+    public static IMediatorBuilder AddHandler(
+        this IMediatorBuilder builder,
         Type handlerType,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
     {
@@ -54,13 +54,13 @@ public static class CommandModelBuilderExtensions
     /// <summary>
     /// Adds command handlers to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="ICommandModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="ICommandModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
-    public static ICommandModelBuilder AddHandlersFrom(
-        this ICommandModelBuilder builder,
+    public static IMediatorBuilder AddHandlersFrom(
+        this IMediatorBuilder builder,
         Action<IServiceDescriptorReflectionBuilder> configure,
         ServiceLifetime defaultLifetime = ServiceLifetime.Transient)
     {
@@ -81,13 +81,13 @@ public static class CommandModelBuilderExtensions
     /// <summary>
     /// Adds command pre-handler to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="ICommandModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="ICommandModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
-    public static ICommandModelBuilder AddPreHandler(
-        this ICommandModelBuilder builder,
+    public static IMediatorBuilder AddPreHandler(
+        this IMediatorBuilder builder,
         Type handlerType,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
     {
@@ -103,13 +103,13 @@ public static class CommandModelBuilderExtensions
     /// <summary>
     /// Adds command pre-handlers to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="ICommandModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="ICommandModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
-    public static ICommandModelBuilder AddPreHandlersFrom(
-        this ICommandModelBuilder builder,
+    public static IMediatorBuilder AddPreHandlersFrom(
+        this IMediatorBuilder builder,
         Action<IServiceDescriptorReflectionBuilder> configure,
         ServiceLifetime defaultLifetime = ServiceLifetime.Transient)
     {
@@ -130,13 +130,13 @@ public static class CommandModelBuilderExtensions
     /// <summary>
     /// Adds command post-handler to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="ICommandModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="ICommandModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
-    public static ICommandModelBuilder AddPostHandler(
-        this ICommandModelBuilder builder,
+    public static IMediatorBuilder AddPostHandler(
+        this IMediatorBuilder builder,
         Type handlerType,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
     {
@@ -152,13 +152,13 @@ public static class CommandModelBuilderExtensions
     /// <summary>
     /// Adds command post-handlers to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="ICommandModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="ICommandModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
-    public static ICommandModelBuilder AddPostHandlersFrom(
-        this ICommandModelBuilder builder,
+    public static IMediatorBuilder AddPostHandlersFrom(
+        this IMediatorBuilder builder,
         Action<IServiceDescriptorReflectionBuilder> configure,
         ServiceLifetime defaultLifetime = ServiceLifetime.Transient)
     {
@@ -179,13 +179,13 @@ public static class CommandModelBuilderExtensions
     /// <summary>
     /// Adds command pipeline behavior to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="ICommandModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="ICommandModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
-    public static ICommandModelBuilder AddBehavior(
-        this ICommandModelBuilder builder,
+    public static IMediatorBuilder AddBehavior(
+        this IMediatorBuilder builder,
         Type handlerType,
         ServiceLifetime lifetime = ServiceLifetime.Transient)
     {
@@ -201,13 +201,13 @@ public static class CommandModelBuilderExtensions
     /// <summary>
     /// Adds command pipeline behaviors to the container.
     /// </summary>
-    /// <param name="builder">The <see cref="ICommandModelBuilder"/>.</param>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="ICommandModelBuilder"/>.</returns>
+    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
-    public static ICommandModelBuilder AddBehaviorsFrom(
-        this ICommandModelBuilder builder,
+    public static IMediatorBuilder AddBehaviorsFrom(
+        this IMediatorBuilder builder,
         Action<IServiceDescriptorReflectionBuilder> configure,
         ServiceLifetime defaultLifetime = ServiceLifetime.Transient)
     {

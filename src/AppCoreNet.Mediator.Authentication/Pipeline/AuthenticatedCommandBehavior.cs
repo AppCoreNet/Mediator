@@ -40,11 +40,10 @@ public class AuthenticatedCommandBehavior<TCommand, TResult> : ICommandPipelineB
     }
 
     /// <inheritdoc />
-    public async Task ProcessAsync(
+    public async Task HandleAsync(
         ICommandContext<TCommand, TResult> context,
         CommandPipelineDelegate<TCommand, TResult> next,
-        CancellationToken cancellationToken
-    )
+        CancellationToken cancellationToken)
     {
         IPrincipal principal = _principalProviders.Select(p => p.GetUser(context))
                                                   .FirstOrDefault(p => p != null) ?? new ClaimsPrincipal(new ClaimsIdentity());

@@ -16,8 +16,8 @@ public interface IEventHandler<in TEvent>
     /// <summary>
     /// Handles the event.
     /// </summary>
-    /// <param name="context">The context of the event that should be handled.</param>
+    /// <param name="event">The event that should be handled.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous event operation.</returns>
-    Task HandleAsync(IEventContext<TEvent> context, CancellationToken cancellationToken);
+    Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
 }

@@ -6,6 +6,7 @@ namespace AppCoreNet.Mediator;
 /// <summary>
 /// Represents a command.
 /// </summary>
+/// <typeparam name="TResult">The result.</typeparam>
 public interface ICommand<out TResult>
 {
 }

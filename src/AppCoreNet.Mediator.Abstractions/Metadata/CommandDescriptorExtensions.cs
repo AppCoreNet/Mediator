@@ -39,7 +39,7 @@ public static class CommandDescriptorExtensions
                 $"Metadata value with key {key} is not of the expected type {typeof(T).GetDisplayName()}");
         }
 
-        value = (T) tmp;
+        value = (T)tmp;
         return true;
     }
 

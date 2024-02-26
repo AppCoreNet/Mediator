@@ -17,10 +17,12 @@ namespace AppCore.Extensions.DependencyInjection;
 public static class CommandModelBuilderExtensions
 {
     /// <summary>
-    /// Registers command authentication pipeline behavior.
+    /// Registers request authentication pipeline behavior.
     /// </summary>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <exception cref="ArgumentNullException">Argument <paramref name="builder"/> is <c>null</c>.</exception>
-    public static ICommandModelBuilder AddAuthentication(this ICommandModelBuilder builder)
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
+    public static IMediatorBuilder AddCommandAuthentication(this IMediatorBuilder builder)
     {
         Ensure.Arg.NotNull(builder);
 
@@ -29,9 +31,7 @@ public static class CommandModelBuilderExtensions
             {
                 ServiceDescriptor.Singleton<ICommandPrincipalProvider, CommandPrincipalProvider>(),
                 ServiceDescriptor.Singleton<ICommandMetadataProvider, AuthorizedCommandMetadataProvider>(),
-                ServiceDescriptor.Transient(
-                    typeof(ICommandPipelineBehavior<,>),
-                    typeof(AuthenticatedCommandBehavior<,>))
+                ServiceDescriptor.Transient(typeof(ICommandPipelineBehavior<,>), typeof(AuthenticatedCommandBehavior<,>)),
             });
 
         return builder;

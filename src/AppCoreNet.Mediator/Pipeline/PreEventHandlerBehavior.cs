@@ -15,7 +15,7 @@ namespace AppCoreNet.Mediator.Pipeline;
 /// Pipeline behavior which invokes <see cref="IPreEventHandler{TEvent}"/>s.
 /// </summary>
 /// <typeparam name="TEvent">The type of the event that is handled.</typeparam>
-public class PreEventHandlerBehavior<TEvent> : IEventPipelineBehavior<TEvent>
+public sealed class PreEventHandlerBehavior<TEvent> : IEventPipelineBehavior<TEvent>
     where TEvent : IEvent
 {
     private readonly List<IPreEventHandler<TEvent>> _handlers;
@@ -42,7 +42,7 @@ public class PreEventHandlerBehavior<TEvent> : IEventPipelineBehavior<TEvent>
     public async Task HandleAsync(
         IEventContext<TEvent> context,
         EventPipelineDelegate<TEvent> next,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         foreach (IPreEventHandler<TEvent> handler in _handlers)
         {

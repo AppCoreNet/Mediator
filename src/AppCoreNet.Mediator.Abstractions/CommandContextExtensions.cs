@@ -47,7 +47,7 @@ public static class CommandContextExtensions
         if (!context.Features.TryGetValue(typeof(T), out object feature))
             throw new InvalidOperationException($"Command context feature {typeof(T).GetDisplayName()} is not available.");
 
-        return (T) feature;
+        return (T)feature;
     }
 
     /// <summary>

@@ -14,7 +14,7 @@ public sealed class VoidResult : IEquatable<VoidResult>
     /// <summary>
     /// Gets the singleton instance of <see cref="VoidResult"/>.
     /// </summary>
-    public static readonly VoidResult Instance = new VoidResult();
+    public static readonly VoidResult Instance = new ();
 
     private VoidResult()
     {
@@ -27,7 +27,7 @@ public sealed class VoidResult : IEquatable<VoidResult>
     }
 
     /// <inheritdoc />
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj))
         {

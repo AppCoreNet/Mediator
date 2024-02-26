@@ -8,34 +8,61 @@ using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
 using AppCoreNet.Mediator.Metadata;
+using Microsoft.Extensions.Logging;
 
 namespace AppCoreNet.Mediator.Pipeline;
 
-internal class CommandPipeline<TCommand, TResult> : ICommandPipeline<TResult>
+public sealed class CommandPipeline<TCommand, TResult> : ICommandPipeline<TResult>
     where TCommand : ICommand<TResult>
 {
+    private readonly ICommandDescriptorFactory _descriptorFactory;
     private readonly IEnumerable<ICommandPipelineBehavior<TCommand, TResult>> _behaviors;
     private readonly ICommandHandler<TCommand, TResult> _handler;
+    private readonly ILogger<CommandPipeline<TCommand, TResult>> _logger;
+    private readonly ICommandContextAccessor? _contextAccessor;
 
-    public CommandPipeline(IEnumerable<ICommandPipelineBehavior<TCommand, TResult>> behaviors, ICommandHandler<TCommand, TResult> handler)
+    public CommandPipeline(
+        ICommandDescriptorFactory descriptorFactory,
+        IEnumerable<ICommandPipelineBehavior<TCommand, TResult>> behaviors,
+        ICommandHandler<TCommand, TResult> handler,
+        ILogger<CommandPipeline<TCommand, TResult>> logger,
+        ICommandContextAccessor? contextAccessor = null)
     {
+        _descriptorFactory = descriptorFactory;
         _behaviors = behaviors;
         _handler = handler;
+        _logger = logger;
+        _contextAccessor = contextAccessor;
     }
 
-    public ICommandContext CreateCommandContext(CommandDescriptor descriptor, ICommand<TResult> command)
+    public async Task<TResult> InvokeAsync(ICommand<TResult> command, CancellationToken cancellationToken = default)
     {
-        return new CommandContext<TCommand, TResult>(descriptor, (TCommand) command);
+        CommandDescriptor descriptor = _descriptorFactory.CreateDescriptor(typeof(TCommand));
+        var context = new CommandContext<TCommand, TResult>(descriptor, (TCommand)command);
+
+        if (_contextAccessor != null)
+            _contextAccessor.CommandContext = context;
+
+        try
+        {
+            return await InvokeAsync(context, cancellationToken)
+                .ConfigureAwait(false);
+        }
+        finally
+        {
+            if (_contextAccessor != null)
+                _contextAccessor.CommandContext = null;
+        }
     }
 
-    public async Task<TResult> InvokeAsync(ICommandContext context, CancellationToken cancellationToken)
+    private async Task<TResult> InvokeAsync(ICommandContext<TCommand, TResult> context, CancellationToken cancellationToken)
     {
         ExceptionDispatchInfo? exceptionDispatchInfo = null;
 
         await _behaviors
               .Reverse()
               .Aggregate(
-                  (CommandPipelineDelegate<TCommand, TResult>) (async (c, ct) =>
+                  (CommandPipelineDelegate<TCommand, TResult>)(async (c, ct) =>
                   {
                       if (!c.IsCompleted)
                       {
@@ -59,10 +86,10 @@ internal class CommandPipeline<TCommand, TResult> : ICommandPipeline<TResult>
                   {
                       ct.ThrowIfCancellationRequested();
 
-                      await behavior.ProcessAsync(c, next, ct)
+                      await behavior.HandleAsync(c, next, ct)
                                     .ConfigureAwait(false);
                   })(
-                  (ICommandContext<TCommand, TResult>) context,
+                  context,
                   cancellationToken);
 
         if (context.IsFailed)
@@ -71,6 +98,6 @@ internal class CommandPipeline<TCommand, TResult> : ICommandPipeline<TResult>
             throw context.Error!;
         }
 
-        return ((ICommandContext<TCommand, TResult>) context).Result!;
+        return context.Result!;
     }
 }

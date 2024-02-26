@@ -8,57 +8,71 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Mediator.Metadata;
 using Microsoft.Extensions.Logging;
 
 namespace AppCoreNet.Mediator.Pipeline;
 
-/// <summary>
-/// Provides the default implementation of <see cref="IEventPipeline{TEvent}"/>.
-/// </summary>
-/// <typeparam name="TEvent">The type of the event.</typeparam>
-public class EventPipeline<TEvent> : IEventPipeline<TEvent>
+public sealed class EventPipeline<TEvent> : IEventPipeline
     where TEvent : IEvent
 {
+    private readonly IEventDescriptorFactory _descriptorFactory;
     private readonly List<IEventPipelineBehavior<TEvent>> _behaviors;
     private readonly List<IEventHandler<TEvent>> _handlers;
     private readonly ILogger<EventPipeline<TEvent>> _logger;
     private readonly IEventContextAccessor? _contextAccessor;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="EventPipeline{TEvent}"/> class.
-    /// </summary>
-    /// <param name="behaviors">The pipeline behaviors.</param>
-    /// <param name="handlers">The event handlers.</param>
-    /// <param name="logger">The logger.</param>
-    /// <param name="contextAccessor">The accessor for the current <see cref="IEventContext"/>.</param>
     public EventPipeline(
+        IEventDescriptorFactory descriptorFactory,
         IEnumerable<IEventPipelineBehavior<TEvent>> behaviors,
         IEnumerable<IEventHandler<TEvent>> handlers,
         ILogger<EventPipeline<TEvent>> logger,
         IEventContextAccessor? contextAccessor = null)
     {
+        Ensure.Arg.NotNull(descriptorFactory);
         Ensure.Arg.NotNull(behaviors);
         Ensure.Arg.NotNull(handlers);
         Ensure.Arg.NotNull(logger);
 
         _behaviors = behaviors.ToList();
         _handlers = handlers.ToList();
+        _descriptorFactory = descriptorFactory;
         _logger = logger;
         _contextAccessor = contextAccessor;
     }
 
     /// <inheritdoc />
-    public async Task ProcessAsync(IEventContext<TEvent> eventContext, CancellationToken cancellationToken)
+    public async Task InvokeAsync(IEvent @event, CancellationToken cancellationToken = default)
     {
-        Ensure.Arg.NotNull(eventContext);
+        Ensure.Arg.NotNull(@event);
 
+        EventDescriptor descriptor = _descriptorFactory.CreateDescriptor(typeof(TEvent));
+        var context = new EventContext<TEvent>(descriptor, (TEvent)@event);
+
+        if (_contextAccessor != null)
+            _contextAccessor.EventContext = context;
+
+        try
+        {
+            await InvokeAsync(context, cancellationToken)
+                .ConfigureAwait(false);
+        }
+        finally
+        {
+            if (_contextAccessor != null)
+                _contextAccessor.EventContext = null;
+        }
+    }
+
+    private async Task InvokeAsync(IEventContext<TEvent> context, CancellationToken cancellationToken)
+    {
         bool handlerInvoked = false;
         async Task Handler(IEventContext<TEvent> c, CancellationToken ct)
         {
             handlerInvoked = true;
             foreach (IEventHandler<TEvent> handler in _handlers)
             {
-                await handler.HandleAsync(c, ct);
+                await handler.HandleAsync(c.Event, ct);
                 ct.ThrowIfCancellationRequested();
             }
         }
@@ -67,23 +81,19 @@ public class EventPipeline<TEvent> : IEventPipeline<TEvent>
 
         var stopwatch = Stopwatch.StartNew();
 
-        if (_contextAccessor != null)
-            _contextAccessor.EventContext = eventContext;
-
         try
         {
             IEventPipelineBehavior<TEvent>? current = null;
             await ((IEnumerable<IEventPipelineBehavior<TEvent>>)_behaviors)
                   .Reverse()
                   .Aggregate(
-                      (EventPipelineDelegate<TEvent>) Handler,
+                      (EventPipelineDelegate<TEvent>)Handler,
                       (next, behavior) => async (e, ct) =>
                       {
                           _logger.InvokingBehavior(typeof(TEvent), behavior.GetType());
                           current = behavior;
                           await behavior.HandleAsync(e, next, ct);
-                      }
-                  )(eventContext, cancellationToken)
+                      })(context, cancellationToken)
                   .ConfigureAwait(false);
 
             if (handlerInvoked)
@@ -100,15 +110,5 @@ public class EventPipeline<TEvent> : IEventPipeline<TEvent>
             _logger.PipelineFailed(typeof(TEvent), stopwatch.Elapsed, error);
             throw;
         }
-        finally
-        {
-            if (_contextAccessor != null)
-                _contextAccessor.EventContext = null;
-        }
-    }
-
-    Task IEventPipeline.ProcessAsync(IEventContext context, CancellationToken cancellationToken)
-    {
-        return ProcessAsync((IEventContext<TEvent>) context, cancellationToken);
     }
 }

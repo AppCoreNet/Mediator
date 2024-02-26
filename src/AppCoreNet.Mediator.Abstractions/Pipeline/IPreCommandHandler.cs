@@ -20,5 +20,5 @@ public interface IPreCommandHandler<in TCommand, TResult>
     /// <param name="context">The context of the command that is about to be processed.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous command operation.</returns>
-    Task OnHandlingAsync(ICommandContext<TCommand, TResult> context, CancellationToken cancellationToken);
+    Task OnHandlingAsync(ICommandContext<TCommand, TResult> context, CancellationToken cancellationToken = default);
 }

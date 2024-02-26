@@ -22,5 +22,5 @@ public interface IPostCommandHandler<in TCommand, TResult>
     /// <returns>A task that represents the asynchronous command operation.</returns>
     Task OnHandledAsync(
         ICommandContext<TCommand, TResult> context,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 }

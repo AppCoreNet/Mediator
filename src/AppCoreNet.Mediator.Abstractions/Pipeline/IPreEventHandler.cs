@@ -19,5 +19,5 @@ public interface IPreEventHandler<in TEvent>
     /// <param name="context">The context of the event that is about to be handled.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous command operation.</returns>
-    Task OnHandlingAsync(IEventContext<TEvent> context, CancellationToken cancellationToken);
+    Task OnHandlingAsync(IEventContext<TEvent> context, CancellationToken cancellationToken = default);
 }

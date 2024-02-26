@@ -15,14 +15,14 @@ public interface ICommandPipelineBehavior<TCommand, TResult>
     where TCommand : ICommand<TResult>
 {
     /// <summary>
-    /// Processes the specified command.
+    /// Handles the specified command.
     /// </summary>
     /// <param name="context">The command context.</param>
     /// <param name="next">The behavior which should be invoked next.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous command operation.</returns>
-    Task ProcessAsync(
+    Task HandleAsync(
         ICommandContext<TCommand, TResult> context,
         CommandPipelineDelegate<TCommand, TResult> next,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 }

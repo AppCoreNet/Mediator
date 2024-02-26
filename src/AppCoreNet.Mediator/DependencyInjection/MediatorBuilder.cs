@@ -6,11 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 // ReSharper disable once CheckNamespace
 namespace AppCore.Extensions.DependencyInjection;
 
-internal sealed class EventModelBuilder : IEventModelBuilder
+internal sealed class MediatorBuilder : IMediatorBuilder
 {
     public IServiceCollection Services { get; }
 
-    public EventModelBuilder(IServiceCollection services)
+    public MediatorBuilder(IServiceCollection services)
     {
         Services = services;
     }

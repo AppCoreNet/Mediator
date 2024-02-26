@@ -15,7 +15,7 @@ namespace AppCoreNet.Mediator.Pipeline;
 /// </summary>
 /// <typeparam name="TCommand">The type of the command.</typeparam>
 /// <typeparam name="TResult">The type of the result.</typeparam>
-public class PreCommandHandlerBehavior<TCommand, TResult> : ICommandPipelineBehavior<TCommand, TResult>
+public sealed class PreCommandHandlerBehavior<TCommand, TResult> : ICommandPipelineBehavior<TCommand, TResult>
     where TCommand : ICommand<TResult>
 {
     private readonly IEnumerable<IPreCommandHandler<TCommand, TResult>> _handlers;
@@ -32,10 +32,10 @@ public class PreCommandHandlerBehavior<TCommand, TResult> : ICommandPipelineBeha
     }
 
     /// <inheritdoc />
-    public async Task ProcessAsync(
+    public async Task HandleAsync(
         ICommandContext<TCommand, TResult> context,
         CommandPipelineDelegate<TCommand, TResult> next,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         if (!context.IsCompleted)
         {

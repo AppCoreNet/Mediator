@@ -24,23 +24,33 @@ public class CancelableEventBehavior<TEvent> : IEventPipelineBehavior<TEvent>
     public async Task HandleAsync(
         IEventContext<TEvent> context,
         EventPipelineDelegate<TEvent> next,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         bool isCancelable = context.EventDescriptor.GetMetadata(
             CancelableEventBehavior.IsCancelableMetadataKey,
             false);
 
-        if (isCancelable)
+        CancellationTokenSource? cts = null;
+        try
         {
-            var cts = new CancellationTokenSource();
-            cancellationToken.Register(() => cts.Cancel());
+            if (isCancelable)
+            {
+                cts = new CancellationTokenSource();
 
-            context.AddFeature<ICancelableEventFeature>(new CancelableEventFeature(cts));
-            cancellationToken = cts.Token;
+                // ReSharper disable once AccessToDisposedClosure
+                cancellationToken.Register(() => cts.Cancel());
+
+                context.AddFeature<ICancelableEventFeature>(new CancelableEventFeature(cts));
+                cancellationToken = cts.Token;
+            }
+
+            await next(context, cancellationToken)
+                .ConfigureAwait(false);
         }
-
-        await next(context, cancellationToken)
-            .ConfigureAwait(false);
+        finally
+        {
+            cts?.Dispose();
+        }
 
         cancellationToken.ThrowIfCancellationRequested();
     }

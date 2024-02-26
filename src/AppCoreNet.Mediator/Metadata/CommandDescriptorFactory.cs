@@ -15,7 +15,6 @@ namespace AppCoreNet.Mediator.Metadata;
 public class CommandDescriptorFactory : ICommandDescriptorFactory
 {
     private readonly ConcurrentDictionary<Type, IReadOnlyDictionary<string, object>> _metadataCache = new ();
-
     private readonly IEnumerable<ICommandMetadataProvider> _metadataProviders;
 
     /// <summary>
