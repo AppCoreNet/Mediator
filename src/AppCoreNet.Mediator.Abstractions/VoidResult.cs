@@ -8,7 +8,7 @@ namespace AppCoreNet.Mediator;
 /// <summary>
 /// Represents a <see cref="Void"/> command result.
 /// </summary>
-/// <seealso cref="ICommand"/>
+/// <seealso cref="IRequest"/>
 public sealed class VoidResult : IEquatable<VoidResult>
 {
     /// <summary>

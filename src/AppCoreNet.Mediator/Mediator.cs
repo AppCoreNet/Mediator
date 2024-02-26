@@ -14,31 +14,31 @@ namespace AppCoreNet.Mediator;
 /// </summary>
 public class Mediator : IMediator
 {
-    private readonly ICommandPipelineFactory _commandPipelineFactory;
+    private readonly IRequestPipelineFactory _requestPipelineFactory;
     private readonly IEventPipelineFactory _eventPipelineFactory;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Mediator"/> class.
     /// </summary>
     /// <param name="eventPipelineFactory">The event pipeline factory.</param>
-    /// <param name="commandPipelineFactory">The command pipeline factory.</param>
+    /// <param name="requestPipelineFactory">The command pipeline factory.</param>
     /// <exception cref="ArgumentNullException">Some argument is <c>null</c>.</exception>
-    public Mediator(ICommandPipelineFactory commandPipelineFactory, IEventPipelineFactory eventPipelineFactory)
+    public Mediator(IRequestPipelineFactory requestPipelineFactory, IEventPipelineFactory eventPipelineFactory)
     {
-        Ensure.Arg.NotNull(commandPipelineFactory);
+        Ensure.Arg.NotNull(requestPipelineFactory);
         Ensure.Arg.NotNull(eventPipelineFactory);
 
-        _commandPipelineFactory = commandPipelineFactory;
+        _requestPipelineFactory = requestPipelineFactory;
         _eventPipelineFactory = eventPipelineFactory;
     }
 
     /// <inheritdoc />
-    public async Task<TResult> ProcessAsync<TResult>(ICommand<TResult> command, CancellationToken cancellationToken)
+    public async Task<TResponse> RequestAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken)
     {
-        Ensure.Arg.NotNull(command);
+        Ensure.Arg.NotNull(request);
 
-        ICommandPipeline<TResult> pipeline = _commandPipelineFactory.CreatePipeline(command);
-        return await pipeline.InvokeAsync(command, cancellationToken)
+        IRequestPipeline<TResponse> pipeline = _requestPipelineFactory.CreatePipeline(request);
+        return await pipeline.InvokeAsync(request, cancellationToken)
                              .ConfigureAwait(false);
     }
 

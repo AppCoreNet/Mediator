@@ -15,7 +15,7 @@ public class EventDescriptorTests
     {
         void Action()
         {
-            _ = new EventDescriptor(typeof(TestCommand), new Dictionary<string, object>());
+            _ = new EventDescriptor(typeof(TestRequest), new Dictionary<string, object>());
         }
 
         Assert.Throws<ArgumentException>(Action);

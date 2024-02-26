@@ -14,7 +14,7 @@ namespace AppCoreNet.Mediator.Metadata;
 /// </summary>
 public class EventDescriptorFactory : IEventDescriptorFactory
 {
-    private readonly ConcurrentDictionary<Type, IReadOnlyDictionary<string, object>> _metadataCache = new();
+    private readonly ConcurrentDictionary<Type, IReadOnlyDictionary<string, object>> _metadataCache = new ();
     private readonly IEnumerable<IEventMetadataProvider> _metadataProviders;
 
     /// <summary>

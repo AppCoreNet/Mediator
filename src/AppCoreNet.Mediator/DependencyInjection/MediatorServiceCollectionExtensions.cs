@@ -28,8 +28,8 @@ public static class MediatorServiceCollectionExtensions
         services.TryAdd(
             new[]
             {
-                ServiceDescriptor.Singleton<ICommandDescriptorFactory, CommandDescriptorFactory>(),
-                ServiceDescriptor.Transient<ICommandPipelineFactory, CommandPipelineFactory>(),
+                ServiceDescriptor.Singleton<IRequestDescriptorFactory, RequestDescriptorFactory>(),
+                ServiceDescriptor.Transient<IRequestPipelineFactory, RequestPipelineFactory>(),
                 ServiceDescriptor.Singleton<IEventDescriptorFactory, EventDescriptorFactory>(),
                 ServiceDescriptor.Transient<IEventPipelineFactory, EventPipelineFactory>(),
                 ServiceDescriptor.Transient<IMediator, Mediator>(),
@@ -38,10 +38,10 @@ public static class MediatorServiceCollectionExtensions
         services.TryAddEnumerable(
             new[]
             {
-                ServiceDescriptor.Singleton<ICommandMetadataProvider, CancelableCommandMetadataProvider>(),
-                ServiceDescriptor.Singleton(typeof(ICommandPipelineBehavior<,>), typeof(CancelableCommandBehavior<,>)),
-                ServiceDescriptor.Transient(typeof(ICommandPipelineBehavior<,>), typeof(PreCommandHandlerBehavior<,>)),
-                ServiceDescriptor.Transient(typeof(ICommandPipelineBehavior<,>), typeof(PostCommandHandlerBehavior<,>)),
+                ServiceDescriptor.Singleton<IRequestMetadataProvider, CancelableRequestMetadataProvider>(),
+                ServiceDescriptor.Singleton(typeof(IRequestPipelineBehavior<,>), typeof(CancelableRequestBehavior<,>)),
+                ServiceDescriptor.Transient(typeof(IRequestPipelineBehavior<,>), typeof(PreRequestHandlerBehavior<,>)),
+                ServiceDescriptor.Transient(typeof(IRequestPipelineBehavior<,>), typeof(PostRequestHandlerBehavior<,>)),
                 ServiceDescriptor.Singleton<IEventMetadataProvider, CancelableEventMetadataProvider>(),
                 ServiceDescriptor.Singleton(typeof(IEventPipelineBehavior<>), typeof(CancelableEventBehavior<>)),
                 ServiceDescriptor.Transient(typeof(IEventPipelineBehavior<>), typeof(PreEventHandlerBehavior<>)),

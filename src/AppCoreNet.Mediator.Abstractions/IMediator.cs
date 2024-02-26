@@ -14,11 +14,11 @@ public interface IMediator
     /// <summary>
     /// Processes a request.
     /// </summary>
-    /// <param name="command">The request to process.</param>
+    /// <param name="request">The request to process.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-    /// <typeparam name="TResult">The type of the result.</typeparam>
+    /// <typeparam name="TResponse">The type of the response.</typeparam>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task<TResult> ProcessAsync<TResult>(ICommand<TResult> command, CancellationToken cancellationToken = default);
+    Task<TResponse> RequestAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Publishes an event.
