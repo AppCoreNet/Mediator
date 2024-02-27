@@ -7,7 +7,7 @@ using AppCoreNet.Mediator.Metadata;
 using FluentAssertions;
 using Xunit;
 
-namespace AppCoreNet.Mediator;
+namespace AppCoreNet.Mediator.Pipeline;
 
 public class RequestContextTests
 {

@@ -3,12 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using AppCoreNet.Mediator.Pipeline;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-namespace AppCoreNet.Mediator;
+namespace AppCoreNet.Mediator.Pipeline;
 
 public class CancelableRequestContextExtensionsTests
 {

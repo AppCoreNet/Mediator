@@ -49,7 +49,7 @@ public sealed class PostNotificationHandlerBehavior<TNotification> : INotificati
 
         foreach (IPostNotificationHandler<TNotification> handler in _handlers)
         {
-            _logger.InvokingPostEventHandler(typeof(TNotification), handler.GetType());
+            _logger.InvokingPostNotificationHandler(typeof(TNotification), handler.GetType());
 
             await handler.OnHandledAsync(context, cancellationToken)
                          .ConfigureAwait(false);

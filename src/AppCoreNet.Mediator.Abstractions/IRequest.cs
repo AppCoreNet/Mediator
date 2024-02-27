@@ -14,6 +14,6 @@ public interface IRequest<out TResponse>
 /// <summary>
 /// Represents a request without a result.
 /// </summary>
-public interface IRequest : IRequest<VoidResult>
+public interface IRequest : IRequest<VoidResponse>
 {
 }

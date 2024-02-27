@@ -20,6 +20,6 @@ public interface IAuthenticatedRequest<out TResponse> : IRequest<TResponse>
 /// <summary>
 /// Represents a request which requires the current principal.
 /// </summary>
-public interface IAuthenticatedRequest : IAuthenticatedRequest<VoidResult>
+public interface IAuthenticatedRequest : IAuthenticatedRequest<VoidResponse>
 {
 }

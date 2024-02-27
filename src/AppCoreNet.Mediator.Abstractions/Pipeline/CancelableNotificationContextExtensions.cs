@@ -2,9 +2,8 @@
 // Copyright (c) The AppCore .NET project.
 
 using AppCoreNet.Diagnostics;
-using AppCoreNet.Mediator.Pipeline;
 
-namespace AppCoreNet.Mediator;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Provides extension methods for the <see cref="INotificationContext"/> type.

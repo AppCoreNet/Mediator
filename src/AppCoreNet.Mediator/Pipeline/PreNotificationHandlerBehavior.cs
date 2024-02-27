@@ -46,7 +46,7 @@ public sealed class PreNotificationHandlerBehavior<TNotification> : INotificatio
     {
         foreach (IPreNotificationHandler<TNotification> handler in _handlers)
         {
-            _logger.InvokingPreEventHandler(typeof(TNotification), handler.GetType());
+            _logger.InvokingPreNotificationHandler(typeof(TNotification), handler.GetType());
 
             await handler.OnHandlingAsync(context, cancellationToken)
                          .ConfigureAwait(false);

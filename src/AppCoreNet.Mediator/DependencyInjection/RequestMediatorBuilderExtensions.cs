@@ -20,7 +20,8 @@ public static class RequestMediatorBuilderExtensions
     /// <summary>
     /// Registers the <see cref="IRequestContextAccessor"/> with the DI container.
     /// </summary>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     public static IMediatorBuilder AddRequestContextAccessor(this IMediatorBuilder builder)
     {
         Ensure.Arg.NotNull(builder);
@@ -35,7 +36,7 @@ public static class RequestMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddRequestHandler(
         this IMediatorBuilder builder,
@@ -57,7 +58,7 @@ public static class RequestMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddRequestHandlersFrom(
         this IMediatorBuilder builder,
@@ -84,7 +85,7 @@ public static class RequestMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddPreRequestHandler(
         this IMediatorBuilder builder,
@@ -106,7 +107,7 @@ public static class RequestMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddPreRequestHandlersFrom(
         this IMediatorBuilder builder,
@@ -133,7 +134,7 @@ public static class RequestMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddPostRequestHandler(
         this IMediatorBuilder builder,
@@ -155,7 +156,7 @@ public static class RequestMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddPostRequestHandlersFrom(
         this IMediatorBuilder builder,
@@ -182,7 +183,7 @@ public static class RequestMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddRequestBehavior(
         this IMediatorBuilder builder,
@@ -204,7 +205,7 @@ public static class RequestMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddRequestBehaviorsFrom(
         this IMediatorBuilder builder,

@@ -13,6 +13,10 @@ using Microsoft.Extensions.Logging;
 
 namespace AppCoreNet.Mediator.Pipeline;
 
+/// <summary>
+/// Represents a notification pipeline.
+/// </summary>
+/// <typeparam name="TNotification">The type of the notification.</typeparam>
 public sealed class NotificationPipeline<TNotification> : INotificationPipeline
     where TNotification : INotification
 {
@@ -22,6 +26,14 @@ public sealed class NotificationPipeline<TNotification> : INotificationPipeline
     private readonly ILogger<NotificationPipeline<TNotification>> _logger;
     private readonly INotificationContextAccessor? _contextAccessor;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NotificationPipeline{TNotification}"/> class.
+    /// </summary>
+    /// <param name="descriptorFactory">The <see cref="INotificationDescriptorFactory"/>.</param>
+    /// <param name="behaviors">The notification pipeline behaviors.</param>
+    /// <param name="handlers">The notification handlers.</param>
+    /// <param name="logger">The <see cref="ILogger{TCategoryName}"/>.</param>
+    /// <param name="contextAccessor">The optional <see cref="INotificationContextAccessor"/>.</param>
     public NotificationPipeline(
         INotificationDescriptorFactory descriptorFactory,
         IEnumerable<INotificationPipelineBehavior<TNotification>> behaviors,
@@ -77,7 +89,7 @@ public sealed class NotificationPipeline<TNotification> : INotificationPipeline
             }
         }
 
-        _logger.PipelineProcessing(typeof(TNotification));
+        _logger.NotificationProcessing(typeof(TNotification));
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -90,24 +102,30 @@ public sealed class NotificationPipeline<TNotification> : INotificationPipeline
                       (NotificationPipelineDelegate<TNotification>)Handler,
                       (next, behavior) => async (e, ct) =>
                       {
-                          _logger.InvokingBehavior(typeof(TNotification), behavior.GetType());
+                          _logger.InvokingNotificationBehavior(typeof(TNotification), behavior.GetType());
+
                           current = behavior;
-                          await behavior.HandleAsync(e, next, ct);
-                      })(context, cancellationToken)
+                          await behavior.HandleAsync(e, next, ct)
+                                        .ConfigureAwait(false);
+
+                          ct.ThrowIfCancellationRequested();
+                      })(
+                      context,
+                      cancellationToken)
                   .ConfigureAwait(false);
 
             if (handlerInvoked)
             {
-                _logger.PipelineProcessed(typeof(TNotification), stopwatch.Elapsed);
+                _logger.NotificationProcessed(typeof(TNotification), stopwatch.Elapsed);
             }
             else
             {
-                _logger.PipelineShortCircuited(typeof(TNotification), current!.GetType(), stopwatch.Elapsed);
+                _logger.NotificationShortCircuited(typeof(TNotification), current?.GetType(), stopwatch.Elapsed);
             }
         }
         catch (Exception error)
         {
-            _logger.PipelineFailed(typeof(TNotification), stopwatch.Elapsed, error);
+            _logger.NotificationFailed(typeof(TNotification), stopwatch.Elapsed, error);
             throw;
         }
     }

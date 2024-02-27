@@ -60,7 +60,7 @@ public class AuthenticatedRequestBehavior<TRequest, TResponse> : IRequestPipelin
 
             if (isAuthorized && !context.IsAuthenticated())
             {
-                context.Fail(new AuthorizationException());
+                context.Fail(new AuthenticationException());
             }
         }
 

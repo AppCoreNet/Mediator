@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AppCoreNet.Mediator.Metadata;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Xunit;
 
@@ -47,7 +48,10 @@ public class PostRequestHandlerBehaviorTests
             new RequestDescriptor(typeof(TestRequest), new Dictionary<string, object>()),
             request);
 
-        var behavior = new PostRequestHandlerBehavior<TestRequest, TestResponse>(handlers);
+        var behavior = new PostRequestHandlerBehavior<TestRequest, TestResponse>(
+            handlers,
+            Substitute.For<ILogger<PostRequestHandlerBehavior<TestRequest, TestResponse>>>());
+
         await behavior.HandleAsync(context, next);
 
         await next.Received(1)

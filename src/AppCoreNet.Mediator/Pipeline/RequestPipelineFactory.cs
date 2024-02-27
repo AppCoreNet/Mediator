@@ -8,6 +8,9 @@ using AppCoreNet.Extensions.DependencyInjection.Activator;
 
 namespace AppCoreNet.Mediator.Pipeline;
 
+/// <summary>
+/// Provides a factory for <see cref="IRequestPipeline{TResponse}"/>.
+/// </summary>
 public sealed class RequestPipelineFactory : IRequestPipelineFactory
 {
     private readonly IActivator _activator;
@@ -23,6 +26,10 @@ public sealed class RequestPipelineFactory : IRequestPipelineFactory
         });
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RequestPipelineFactory"/> class.
+    /// </summary>
+    /// <param name="activator">The <see cref="IActivator"/>.</param>
     public RequestPipelineFactory(IActivator activator)
     {
         Ensure.Arg.NotNull(activator);

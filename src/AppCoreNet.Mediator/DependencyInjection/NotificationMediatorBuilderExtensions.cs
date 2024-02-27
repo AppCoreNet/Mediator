@@ -21,7 +21,7 @@ public static class NotificationMediatorBuilderExtensions
     /// Registers the <see cref="INotificationContextAccessor"/> with the DI container.
     /// </summary>
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     public static IMediatorBuilder AddNotificationContextAccessor(this IMediatorBuilder builder)
     {
         Ensure.Arg.NotNull(builder);
@@ -35,7 +35,7 @@ public static class NotificationMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the notification.</param>
     /// <param name="lifetime">The lifetime of the notification.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddNotificationHandler(
         this IMediatorBuilder builder,
@@ -57,7 +57,7 @@ public static class NotificationMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddNotificationHandlersFrom(
         this IMediatorBuilder builder,
@@ -84,7 +84,7 @@ public static class NotificationMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddPreNotificationHandler(
         this IMediatorBuilder builder,
@@ -106,7 +106,7 @@ public static class NotificationMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddPreNotificationHandlersFrom(
         this IMediatorBuilder builder,
@@ -133,7 +133,7 @@ public static class NotificationMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddPostNotificationHandler(
         this IMediatorBuilder builder,
@@ -155,7 +155,7 @@ public static class NotificationMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddPostNotificationHandlersFrom(
         this IMediatorBuilder builder,
@@ -182,7 +182,7 @@ public static class NotificationMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="handlerType">The type of the handler.</param>
     /// <param name="lifetime">The lifetime of the handler.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="handlerType"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddNotificationBehavior(
         this IMediatorBuilder builder,
@@ -204,7 +204,7 @@ public static class NotificationMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <param name="configure">The delegate used to configure the registration sources.</param>
     /// <param name="defaultLifetime">The default handler lifetime.</param>
-    /// <returns>The <see cref="IMediatorBuilder"/>.</returns>
+    /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
     /// <exception cref="ArgumentNullException">Argument <paramref name="configure"/> is <c>null</c>.</exception>
     public static IMediatorBuilder AddNotificationBehaviorsFrom(
         this IMediatorBuilder builder,

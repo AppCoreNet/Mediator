@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AppCoreNet.Mediator.Metadata;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Xunit;
 
@@ -41,7 +42,10 @@ public class PreRequestHandlerBehaviorTests
             new RequestDescriptor(typeof(TestRequest), new Dictionary<string, object>()),
             request);
 
-        var behavior = new PreRequestHandlerBehavior<TestRequest, TestResponse>(handlers);
+        var behavior = new PreRequestHandlerBehavior<TestRequest, TestResponse>(
+            handlers,
+            Substitute.For<ILogger<PreRequestHandlerBehavior<TestRequest, TestResponse>>>());
+
         await behavior.HandleAsync(context, next);
 
         await handlers[0]

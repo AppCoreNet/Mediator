@@ -6,7 +6,7 @@ using System;
 namespace AppCoreNet.Mediator;
 
 /// <summary>
-/// When applied to a request type, requires authorization of the user.
+/// When applied to a request type, requires authentication of the user.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
 public class AuthorizeAttribute : Attribute

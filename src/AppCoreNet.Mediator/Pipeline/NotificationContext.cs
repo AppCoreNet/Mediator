@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using AppCoreNet.Diagnostics;
 using AppCoreNet.Mediator.Metadata;
 
-namespace AppCoreNet.Mediator;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Default implementation of the <see cref="INotificationContext{TNotification}"/> interface.

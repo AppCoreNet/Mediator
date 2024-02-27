@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using AppCoreNet.Mediator.Metadata;
 
-namespace AppCoreNet.Mediator;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Represents the context when processing notifications.

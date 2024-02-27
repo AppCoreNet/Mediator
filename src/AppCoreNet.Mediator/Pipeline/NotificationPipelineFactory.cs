@@ -8,6 +8,9 @@ using AppCoreNet.Extensions.DependencyInjection.Activator;
 
 namespace AppCoreNet.Mediator.Pipeline;
 
+/// <summary>
+/// Provides a factory for <see cref="INotificationPipeline"/>.
+/// </summary>
 public sealed class NotificationPipelineFactory : INotificationPipelineFactory
 {
     private static readonly Type _pipelineType = typeof(NotificationPipeline<>);
@@ -15,6 +18,10 @@ public sealed class NotificationPipelineFactory : INotificationPipelineFactory
 
     private readonly IActivator _activator;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NotificationPipelineFactory"/> class.
+    /// </summary>
+    /// <param name="activator">The <see cref="IActivator"/>.</param>
     public NotificationPipelineFactory(IActivator activator)
     {
         Ensure.Arg.NotNull(activator);

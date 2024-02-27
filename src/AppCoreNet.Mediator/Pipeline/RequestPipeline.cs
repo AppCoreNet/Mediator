@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading;
@@ -12,6 +13,11 @@ using Microsoft.Extensions.Logging;
 
 namespace AppCoreNet.Mediator.Pipeline;
 
+/// <summary>
+/// Represents a request pipeline.
+/// </summary>
+/// <typeparam name="TRequest">The type of the request.</typeparam>
+/// <typeparam name="TResponse">The type of the response.</typeparam>
 public sealed class RequestPipeline<TRequest, TResponse> : IRequestPipeline<TResponse>
     where TRequest : IRequest<TResponse>
 {
@@ -21,6 +27,14 @@ public sealed class RequestPipeline<TRequest, TResponse> : IRequestPipeline<TRes
     private readonly ILogger<RequestPipeline<TRequest, TResponse>> _logger;
     private readonly IRequestContextAccessor? _contextAccessor;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RequestPipeline{TRequest,TResponse}"/> class.
+    /// </summary>
+    /// <param name="descriptorFactory">The <see cref="IRequestDescriptorFactory"/>.</param>
+    /// <param name="behaviors">The request pipeline behaviors.</param>
+    /// <param name="handler">The request handler.</param>
+    /// <param name="logger">The <see cref="ILogger{TCategoryName}"/>.</param>
+    /// <param name="contextAccessor">The optional <see cref="IRequestContextAccessor"/>.</param>
     public RequestPipeline(
         IRequestDescriptorFactory descriptorFactory,
         IEnumerable<IRequestPipelineBehavior<TRequest, TResponse>> behaviors,
@@ -60,43 +74,70 @@ public sealed class RequestPipeline<TRequest, TResponse> : IRequestPipeline<TRes
     {
         ExceptionDispatchInfo? exceptionDispatchInfo = null;
 
-        await _behaviors
-              .Reverse()
-              .Aggregate(
-                  (RequestPipelineDelegate<TRequest, TResponse>)(async (c, ct) =>
-                  {
-                      if (!c.IsCompleted)
-                      {
-                          ct.ThrowIfCancellationRequested();
+        _logger.RequestProcessing(typeof(TRequest));
 
-                          try
-                          {
-                              TResponse result = await _handler.HandleAsync(c.Request, ct)
-                                                             .ConfigureAwait(false);
+        var stopwatch = Stopwatch.StartNew();
 
-                              c.Complete(result);
-                          }
-                          catch (Exception error)
-                          {
-                              exceptionDispatchInfo = ExceptionDispatchInfo.Capture(error);
-                              c.Fail(error);
-                          }
-                      }
-                  }),
-                  (next, behavior) => async (c, ct) =>
-                  {
-                      ct.ThrowIfCancellationRequested();
+        bool handlerInvoked = false;
+        IRequestPipelineBehavior<TRequest, TResponse>? current = null;
 
-                      await behavior.HandleAsync(c, next, ct)
-                                    .ConfigureAwait(false);
-                  })(
-                  context,
-                  cancellationToken);
-
-        if (context.IsFailed)
+        try
         {
-            exceptionDispatchInfo?.Throw();
-            throw context.Error!;
+            await _behaviors
+                  .Reverse()
+                  .Aggregate(
+                      (RequestPipelineDelegate<TRequest, TResponse>)(async (c, ct) =>
+                      {
+                          handlerInvoked = true;
+                          if (!c.IsCompleted)
+                          {
+                              ct.ThrowIfCancellationRequested();
+                              try
+                              {
+                                  TResponse result = await _handler.HandleAsync(c.Request, ct)
+                                                                   .ConfigureAwait(false);
+
+                                  c.Complete(result);
+                              }
+                              catch (Exception error)
+                              {
+                                  exceptionDispatchInfo = ExceptionDispatchInfo.Capture(error);
+                                  c.Fail(error);
+                              }
+                          }
+                      }),
+                      (next, behavior) => async (c, ct) =>
+                      {
+                          _logger.InvokingRequestBehavior(typeof(TRequest), behavior.GetType());
+
+                          current = behavior;
+                          await behavior.HandleAsync(c, next, ct)
+                                        .ConfigureAwait(false);
+
+                          ct.ThrowIfCancellationRequested();
+                      })(
+                      context,
+                      cancellationToken);
+
+            if (context.IsFailed)
+            {
+                exceptionDispatchInfo?.Throw();
+                throw context.Error!;
+            }
+        }
+        catch (Exception error)
+        {
+            _logger.RequestFailed(typeof(TRequest), stopwatch.Elapsed, error);
+            throw;
+        }
+
+        if (handlerInvoked)
+        {
+            _logger.RequestProcessed(typeof(TRequest), stopwatch.Elapsed);
+        }
+        else
+        {
+            _logger.RequestShortCircuited(typeof(TRequest), current?.GetType(), stopwatch.Elapsed);
         }
 
         return context.Response!;

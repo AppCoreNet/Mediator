@@ -7,7 +7,7 @@ using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-namespace AppCoreNet.Mediator;
+namespace AppCoreNet.Mediator.Pipeline;
 
 public class RequestContextExtensionsTests
 {
