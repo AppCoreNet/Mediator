@@ -1,10 +1,10 @@
-AppCore .NET Data
+AppCore .NET Mediator
 -----------------
 
-![Nuget](https://img.shields.io/nuget/v/AppCoreNet.Data.Abstractions)
-![MyGet](https://img.shields.io/myget/appcorenet/vpre/AppCoreNet.Data.Abstractions?label=myget)
+![Nuget](https://img.shields.io/nuget/v/AppCoreNet.Mediator.Abstractions)
+![MyGet](https://img.shields.io/myget/appcorenet/vpre/AppCoreNet.Mediator.Abstractions?label=myget)
 
-This repository includes projects containing abstractions and implementations of the persistence framework.
+This repository includes projects containing abstractions and implementations of the mediator framework.
 
 All artifacts are licensed under the [MIT license](LICENSE). You are free to use them in open-source or commercial projects as long
 as you keep the copyright notice intact when redistributing or otherwise reusing our artifacts.
@@ -13,14 +13,12 @@ as you keep the copyright notice intact when redistributing or otherwise reusing
 
 Latest development packages can be found on [MyGet](https://www.myget.org/gallery/appcorenet).
 
-| Package                               | Description                                             |
-|---------------------------------------|---------------------------------------------------------|
-| `AppCoreNet.Data`                     | Provides persistence framework default implementations. |
-| `AppCoreNet.Data.Abstractions`        | Provides the public API of the persistence framework.   |
-| `AppCoreNet.Data.EntityFrameworkCore` | Adds support for EntityFramework Core.                  |
-| `AppCoreNet.Data.MongoDB`             | Adds support for Mongo DB.                              |
-| `AppCoreNet.Data.AutoMapper`          | Adds support for mapping entities using AutoMapper.     |
-
+| Package                                            | Description                                          |
+|----------------------------------------------------|------------------------------------------------------|
+| `AppCoreNet.Mediator`                              | Provides mediator framework default implementations. |
+| `AppCoreNet.Mediator.Abstractions`                 | Provides the public API of the mediator framework.   |
+| `AppCoreNet.Mediator.Authentication`               | Adds support for request authentication.             |
+| `AppCoreNet.Mediator.Authentication.Abstractions`  | Provides the public API for request authentication.  |
 
 ## Contributing
 
