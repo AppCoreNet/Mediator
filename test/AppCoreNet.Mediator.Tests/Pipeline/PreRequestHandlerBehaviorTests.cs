@@ -36,10 +36,10 @@ public class PreRequestHandlerBehaviorTests
         next.When(n => n.Invoke(Arg.Any<IRequestContext<TestRequest, TestResponse>>(), Arg.Any<CancellationToken>()))
             .Do(_ => { invokeOrder.Add(next); });
 
-        var command = new TestRequest();
+        var request = new TestRequest();
         var context = new RequestContext<TestRequest, TestResponse>(
             new RequestDescriptor(typeof(TestRequest), new Dictionary<string, object>()),
-            command);
+            request);
 
         var behavior = new PreRequestHandlerBehavior<TestRequest, TestResponse>(handlers);
         await behavior.HandleAsync(context, next);

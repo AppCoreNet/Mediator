@@ -31,7 +31,7 @@ public static class AuthenticatedRequestContextExtensions
     public static IPrincipal User(this IRequestContext context)
     {
         Ensure.Arg.NotNull(context);
-        var feature = context.GetFeature<IAuthenticatedCommandFeature>();
+        var feature = context.GetFeature<IAuthenticatedRequestFeature>();
         return feature.User;
     }
 }

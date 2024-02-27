@@ -11,7 +11,7 @@ public class RequestDescriptorTests
     {
         void Action()
         {
-            _ = new RequestDescriptor(typeof(TestEvent), new Dictionary<string, object>());
+            _ = new RequestDescriptor(typeof(TestNotification), new Dictionary<string, object>());
         }
 
         Assert.Throws<ArgumentException>(Action);

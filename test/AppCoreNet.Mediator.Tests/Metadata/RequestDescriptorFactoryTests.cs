@@ -13,7 +13,7 @@ namespace AppCoreNet.Mediator.Metadata;
 public class RequestDescriptorFactoryTests
 {
     [Fact]
-    public void CreatesCommandDescriptor()
+    public void CreatesDescriptor()
     {
         var factory = new RequestDescriptorFactory(Enumerable.Empty<IRequestMetadataProvider>());
         RequestDescriptor descriptor = factory.CreateDescriptor(typeof(TestRequest));
@@ -23,7 +23,7 @@ public class RequestDescriptorFactoryTests
     }
 
     [Fact]
-    public void PopulatesCommandDescriptorWithMetadata()
+    public void PopulatesDescriptorWithMetadata()
     {
         var provider1 = Substitute.For<IRequestMetadataProvider>();
         provider1.When(p => p.GetMetadata(Arg.Any<Type>(), Arg.Any<IDictionary<string, object>>()))

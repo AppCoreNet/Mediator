@@ -19,6 +19,6 @@ public interface IPreRequestHandler<in TRequest, TResponse>
     /// </summary>
     /// <param name="context">The context of the request that is about to be processed.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-    /// <returns>A task that represents the asynchronous command operation.</returns>
+    /// <returns>A task that represents the asynchronous request operation.</returns>
     Task OnHandlingAsync(IRequestContext<TRequest, TResponse> context, CancellationToken cancellationToken = default);
 }

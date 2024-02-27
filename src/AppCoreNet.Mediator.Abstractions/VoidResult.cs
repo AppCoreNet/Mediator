@@ -6,7 +6,7 @@ using System;
 namespace AppCoreNet.Mediator;
 
 /// <summary>
-/// Represents a <see cref="Void"/> command result.
+/// Represents a <see cref="Void"/> request result.
 /// </summary>
 /// <seealso cref="IRequest"/>
 public sealed class VoidResult : IEquatable<VoidResult>

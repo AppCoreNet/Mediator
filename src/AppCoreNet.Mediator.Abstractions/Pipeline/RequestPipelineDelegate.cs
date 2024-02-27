@@ -13,7 +13,7 @@ namespace AppCoreNet.Mediator.Pipeline;
 /// <typeparam name="TResponse">The response produced by the request.</typeparam>
 /// <param name="request">The request.</param>
 /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-/// <returns>A task that represents the asynchronous command operation.</returns>
+/// <returns>A task that represents the asynchronous request operation.</returns>
 public delegate Task RequestPipelineDelegate<in TRequest, TResponse>(
     IRequestContext<TRequest, TResponse> request,
     CancellationToken cancellationToken)

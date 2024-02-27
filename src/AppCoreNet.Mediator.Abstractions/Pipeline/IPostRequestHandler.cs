@@ -19,7 +19,7 @@ public interface IPostRequestHandler<in TRequest, TResponse>
     /// </summary>
     /// <param name="context">The context of the request that was processed.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-    /// <returns>A task that represents the asynchronous command operation.</returns>
+    /// <returns>A task that represents the asynchronous request operation.</returns>
     Task OnHandledAsync(
         IRequestContext<TRequest, TResponse> context,
         CancellationToken cancellationToken = default);

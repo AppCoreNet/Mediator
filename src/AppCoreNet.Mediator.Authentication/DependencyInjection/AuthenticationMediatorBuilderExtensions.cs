@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace AppCore.Extensions.DependencyInjection;
 
 /// <summary>
-/// Provides extensions to register the command model.
+/// Provides extensions to register request authentication.
 /// </summary>
 public static class AuthenticationMediatorBuilderExtensions
 {
@@ -22,7 +22,7 @@ public static class AuthenticationMediatorBuilderExtensions
     /// <param name="builder">The <see cref="IMediatorBuilder"/>.</param>
     /// <exception cref="ArgumentNullException">Argument <paramref name="builder"/> is <c>null</c>.</exception>
     /// <returns>The passed <see cref="IMediatorBuilder"/> to allow chaining.</returns>
-    public static IMediatorBuilder AddCommandAuthentication(this IMediatorBuilder builder)
+    public static IMediatorBuilder AddRequestAuthentication(this IMediatorBuilder builder)
     {
         Ensure.Arg.NotNull(builder);
 

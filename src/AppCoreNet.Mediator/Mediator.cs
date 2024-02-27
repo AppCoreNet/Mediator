@@ -15,25 +15,29 @@ namespace AppCoreNet.Mediator;
 public class Mediator : IMediator
 {
     private readonly IRequestPipelineFactory _requestPipelineFactory;
-    private readonly IEventPipelineFactory _eventPipelineFactory;
+    private readonly INotificationPipelineFactory _notificationPipelineFactory;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Mediator"/> class.
     /// </summary>
-    /// <param name="eventPipelineFactory">The event pipeline factory.</param>
-    /// <param name="requestPipelineFactory">The command pipeline factory.</param>
+    /// <param name="notificationPipelineFactory">The notification pipeline factory.</param>
+    /// <param name="requestPipelineFactory">The request pipeline factory.</param>
     /// <exception cref="ArgumentNullException">Some argument is <c>null</c>.</exception>
-    public Mediator(IRequestPipelineFactory requestPipelineFactory, IEventPipelineFactory eventPipelineFactory)
+    public Mediator(
+        IRequestPipelineFactory requestPipelineFactory,
+        INotificationPipelineFactory notificationPipelineFactory)
     {
         Ensure.Arg.NotNull(requestPipelineFactory);
-        Ensure.Arg.NotNull(eventPipelineFactory);
+        Ensure.Arg.NotNull(notificationPipelineFactory);
 
         _requestPipelineFactory = requestPipelineFactory;
-        _eventPipelineFactory = eventPipelineFactory;
+        _notificationPipelineFactory = notificationPipelineFactory;
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> RequestAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken)
+    public async Task<TResponse> RequestAsync<TResponse>(
+        IRequest<TResponse> request,
+        CancellationToken cancellationToken = default)
     {
         Ensure.Arg.NotNull(request);
 
@@ -43,12 +47,12 @@ public class Mediator : IMediator
     }
 
     /// <inheritdoc />
-    public async Task PublishAsync(IEvent @event, CancellationToken cancellationToken)
+    public async Task NotifyAsync(INotification notification, CancellationToken cancellationToken = default)
     {
-        Ensure.Arg.NotNull(@event);
+        Ensure.Arg.NotNull(notification);
 
-        IEventPipeline pipeline = _eventPipelineFactory.CreatePipeline(@event);
-        await pipeline.InvokeAsync(@event, cancellationToken)
+        INotificationPipeline pipeline = _notificationPipelineFactory.CreatePipeline(notification);
+        await pipeline.InvokeAsync(notification, cancellationToken)
                       .ConfigureAwait(false);
     }
 }

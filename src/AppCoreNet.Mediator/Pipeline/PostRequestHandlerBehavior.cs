@@ -11,7 +11,7 @@ namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Pipeline behavior which invokes <see cref="IPostRequestHandler{TRequest,TResponse}"/>s when the
-/// command has been successfully handled.
+/// request has been successfully handled.
 /// </summary>
 /// <typeparam name="TRequest">The type of the request.</typeparam>
 /// <typeparam name="TResponse">The type of the response.</typeparam>

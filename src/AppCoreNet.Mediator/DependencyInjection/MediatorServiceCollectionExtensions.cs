@@ -30,8 +30,8 @@ public static class MediatorServiceCollectionExtensions
             {
                 ServiceDescriptor.Singleton<IRequestDescriptorFactory, RequestDescriptorFactory>(),
                 ServiceDescriptor.Transient<IRequestPipelineFactory, RequestPipelineFactory>(),
-                ServiceDescriptor.Singleton<IEventDescriptorFactory, EventDescriptorFactory>(),
-                ServiceDescriptor.Transient<IEventPipelineFactory, EventPipelineFactory>(),
+                ServiceDescriptor.Singleton<INotificationDescriptorFactory, NotificationDescriptorFactory>(),
+                ServiceDescriptor.Transient<INotificationPipelineFactory, NotificationPipelineFactory>(),
                 ServiceDescriptor.Transient<IMediator, Mediator>(),
             });
 
@@ -42,10 +42,10 @@ public static class MediatorServiceCollectionExtensions
                 ServiceDescriptor.Singleton(typeof(IRequestPipelineBehavior<,>), typeof(CancelableRequestBehavior<,>)),
                 ServiceDescriptor.Transient(typeof(IRequestPipelineBehavior<,>), typeof(PreRequestHandlerBehavior<,>)),
                 ServiceDescriptor.Transient(typeof(IRequestPipelineBehavior<,>), typeof(PostRequestHandlerBehavior<,>)),
-                ServiceDescriptor.Singleton<IEventMetadataProvider, CancelableEventMetadataProvider>(),
-                ServiceDescriptor.Singleton(typeof(IEventPipelineBehavior<>), typeof(CancelableEventBehavior<>)),
-                ServiceDescriptor.Transient(typeof(IEventPipelineBehavior<>), typeof(PreEventHandlerBehavior<>)),
-                ServiceDescriptor.Transient(typeof(IEventPipelineBehavior<>), typeof(PostEventHandlerBehavior<>)),
+                ServiceDescriptor.Singleton<INotificationMetadataProvider, CancelableNotificationMetadataProvider>(),
+                ServiceDescriptor.Singleton(typeof(INotificationPipelineBehavior<>), typeof(CancelableNotificationBehavior<>)),
+                ServiceDescriptor.Transient(typeof(INotificationPipelineBehavior<>), typeof(PreNotificationHandlerBehavior<>)),
+                ServiceDescriptor.Transient(typeof(INotificationPipelineBehavior<>), typeof(PostNotificationHandlerBehavior<>)),
             });
 
         return new MediatorBuilder(services);

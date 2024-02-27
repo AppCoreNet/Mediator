@@ -11,15 +11,15 @@ namespace AppCoreNet.Mediator.Pipeline;
 public sealed class RequestPipelineFactory : IRequestPipelineFactory
 {
     private readonly IActivator _activator;
-    private static readonly Type _requestPipelineType = typeof(RequestPipeline<,>);
-    private static readonly ConcurrentDictionary<Type, Type> _requestPipelineTypes = new ();
+    private static readonly Type _pipelineType = typeof(RequestPipeline<,>);
+    private static readonly ConcurrentDictionary<Type, Type> _pipelineTypes = new ();
 
     private static Type GetRequestPipelineType(Type requestType)
     {
-        return _requestPipelineTypes.GetOrAdd(requestType, t =>
+        return _pipelineTypes.GetOrAdd(requestType, t =>
         {
-            Type commandInterfaceType = t.GetClosedTypeOf(typeof(IRequest<>));
-            return _requestPipelineType.MakeGenericType(t, commandInterfaceType.GenericTypeArguments[0]);
+            Type requestInterfaceType = t.GetClosedTypeOf(typeof(IRequest<>));
+            return _pipelineType.MakeGenericType(t, requestInterfaceType.GenericTypeArguments[0]);
         });
     }
 

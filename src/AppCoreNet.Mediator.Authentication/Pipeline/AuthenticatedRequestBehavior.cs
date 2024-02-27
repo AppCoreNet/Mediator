@@ -18,7 +18,7 @@ internal class AuthenticatedRequestBehavior
 }
 
 /// <summary>
-/// Implements authentication support for commands. The command must be decorated with the
+/// Implements authentication support for request. The request must be decorated with the
 /// <see cref="AuthorizeAttribute"/>. The current user is obtained using implementations
 /// of <see cref="IRequestPrincipalProvider"/>.
 /// </summary>
@@ -32,7 +32,7 @@ public class AuthenticatedRequestBehavior<TRequest, TResponse> : IRequestPipelin
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticatedRequestBehavior{TRequest,TResponse}"/> class.
     /// </summary>
-    /// <param name="principalProviders">The command principal providers.</param>
+    /// <param name="principalProviders">The request principal providers.</param>
     public AuthenticatedRequestBehavior(IEnumerable<IRequestPrincipalProvider> principalProviders)
     {
         Ensure.Arg.NotNull(principalProviders);
@@ -46,9 +46,10 @@ public class AuthenticatedRequestBehavior<TRequest, TResponse> : IRequestPipelin
         CancellationToken cancellationToken)
     {
         IPrincipal principal = _principalProviders.Select(p => p.GetUser(context))
-                                                  .FirstOrDefault(p => p != null) ?? new ClaimsPrincipal(new ClaimsIdentity());
+                                                  .FirstOrDefault(p => p != null)
+                               ?? new ClaimsPrincipal(new ClaimsIdentity());
 
-        context.AddFeature<IAuthenticatedCommandFeature>(new AuthenticatedCommandFeature(principal));
+        context.AddFeature<IAuthenticatedRequestFeature>(new AuthenticatedRequestFeature(principal));
 
         if (!context.IsCompleted)
         {

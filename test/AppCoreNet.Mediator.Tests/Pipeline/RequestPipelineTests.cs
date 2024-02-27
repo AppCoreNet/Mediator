@@ -21,13 +21,13 @@ public class RequestPipelineTests
     {
         var handler1 = Substitute.For<IRequestHandler<TestRequest, TestResponse>>();
 
-        var command = new TestRequest();
-        Type commandType = typeof(TestRequest);
+        var request = new TestRequest();
+        Type requestType = typeof(TestRequest);
 
-        var descriptor = new RequestDescriptor(commandType, new Dictionary<string, object>());
+        var descriptor = new RequestDescriptor(requestType, new Dictionary<string, object>());
 
         var descriptorFactory = Substitute.For<IRequestDescriptorFactory>();
-        descriptorFactory.CreateDescriptor(commandType)
+        descriptorFactory.CreateDescriptor(requestType)
                          .Returns(descriptor);
 
         var pipeline = new RequestPipeline<TestRequest, TestResponse>(
@@ -36,11 +36,11 @@ public class RequestPipelineTests
             handler1,
             Substitute.For<ILogger<RequestPipeline<TestRequest, TestResponse>>>());
 
-        await pipeline.InvokeAsync(command);
+        await pipeline.InvokeAsync(request);
 
         await handler1.Received(1)
                       .HandleAsync(
-                          Arg.Is(command),
+                          Arg.Is(request),
                           Arg.Any<CancellationToken>());
     }
 
@@ -79,13 +79,13 @@ public class RequestPipelineTests
                              ci.ArgAt<CancellationToken>(2));
                      });
 
-        var command = new TestRequest();
-        Type commandType = typeof(TestRequest);
+        var request = new TestRequest();
+        Type requestType = typeof(TestRequest);
 
-        var descriptor = new RequestDescriptor(commandType, new Dictionary<string, object>());
+        var descriptor = new RequestDescriptor(requestType, new Dictionary<string, object>());
 
         var descriptorFactory = Substitute.For<IRequestDescriptorFactory>();
-        descriptorFactory.CreateDescriptor(commandType)
+        descriptorFactory.CreateDescriptor(requestType)
                          .Returns(descriptor);
 
         var pipeline = new RequestPipeline<TestRequest, TestResponse>(
@@ -94,12 +94,12 @@ public class RequestPipelineTests
             Substitute.For<IRequestHandler<TestRequest, TestResponse>>(),
             Substitute.For<ILogger<RequestPipeline<TestRequest, TestResponse>>>());
 
-        await pipeline.InvokeAsync(command);
+        await pipeline.InvokeAsync(request);
 
         await behavior1.Received(1)
                        .HandleAsync(
                            Arg.Is<IRequestContext<TestRequest, TestResponse>>(
-                               i => i.Request == command && i.RequestDescriptor == descriptor),
+                               i => i.Request == request && i.RequestDescriptor == descriptor),
                            Arg.Any<RequestPipelineDelegate<TestRequest, TestResponse>>(),
                            Arg.Any<CancellationToken>());
 
@@ -110,7 +110,7 @@ public class RequestPipelineTests
         await behavior2.Received(1)
                        .HandleAsync(
                            Arg.Is<IRequestContext<TestRequest, TestResponse>>(
-                               i => i.Request == command && i.RequestDescriptor == descriptor),
+                               i => i.Request == request && i.RequestDescriptor == descriptor),
                            Arg.Any<RequestPipelineDelegate<TestRequest, TestResponse>>(),
                            Arg.Any<CancellationToken>());
 
@@ -120,18 +120,18 @@ public class RequestPipelineTests
     }
 
     [Fact]
-    public async Task AssignsCommandContext()
+    public async Task AssignsContext()
     {
         var handler = Substitute.For<IRequestHandler<TestRequest, TestResponse>>();
         var accessor = Substitute.For<IRequestContextAccessor>();
 
-        var command = new TestRequest();
-        Type commandType = typeof(TestRequest);
+        var request = new TestRequest();
+        Type requestType = typeof(TestRequest);
 
-        var descriptor = new RequestDescriptor(commandType, new Dictionary<string, object>());
+        var descriptor = new RequestDescriptor(requestType, new Dictionary<string, object>());
 
         var descriptorFactory = Substitute.For<IRequestDescriptorFactory>();
-        descriptorFactory.CreateDescriptor(commandType)
+        descriptorFactory.CreateDescriptor(requestType)
                          .Returns(descriptor);
 
         var pipeline = new RequestPipeline<TestRequest, TestResponse>(
@@ -141,11 +141,11 @@ public class RequestPipelineTests
             Substitute.For<ILogger<RequestPipeline<TestRequest, TestResponse>>>(),
             accessor);
 
-        await pipeline.InvokeAsync(command);
+        await pipeline.InvokeAsync(request);
 
         accessor.Received(1)
                 .CurrentContext = Arg.Is<IRequestContext<TestRequest, TestResponse>>(
-            c => c.Request == command && c.RequestDescriptor == descriptor);
+            c => c.Request == request && c.RequestDescriptor == descriptor);
 
         accessor.Received(1)
                 .CurrentContext = null;

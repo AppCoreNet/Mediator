@@ -12,10 +12,10 @@ namespace AppCoreNet.Mediator;
 public class RequestContextTests
 {
     [Fact]
-    public void CtorThrowsIfCommandDoesNotMatchDescriptorType()
+    public void CtorThrowsIfRequestDoesNotMatchDescriptorType()
     {
-        Type commandType = typeof(TestRequest);
-        var descriptor = new RequestDescriptor(commandType, new Dictionary<string, object>());
+        Type requestType = typeof(TestRequest);
+        var descriptor = new RequestDescriptor(requestType, new Dictionary<string, object>());
 
         Action action = () =>
         {
@@ -30,15 +30,15 @@ public class RequestContextTests
     [Fact]
     public void GetRequestReturnsRequest()
     {
-        Type commandType = typeof(TestRequest);
-        var descriptor = new RequestDescriptor(commandType, new Dictionary<string, object>());
-        var command = new TestRequest();
-        var context = new RequestContext<TestRequest, TestResponse>(descriptor, command);
+        Type requestType = typeof(TestRequest);
+        var descriptor = new RequestDescriptor(requestType, new Dictionary<string, object>());
+        var request = new TestRequest();
+        var context = new RequestContext<TestRequest, TestResponse>(descriptor, request);
 
         context.Request.Should()
-               .BeSameAs(command);
+               .BeSameAs(request);
 
         ((IRequestContext)context).Request.Should()
-                                  .BeSameAs(command);
+                                  .BeSameAs(request);
     }
 }

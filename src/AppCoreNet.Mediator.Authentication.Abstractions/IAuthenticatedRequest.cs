@@ -12,7 +12,7 @@ namespace AppCoreNet.Mediator;
 public interface IAuthenticatedRequest<out TResponse> : IRequest<TResponse>
 {
     /// <summary>
-    /// Gets the <see cref="IPrincipal"/> used to authorize the command.
+    /// Gets the <see cref="IPrincipal"/> used to authorize the request.
     /// </summary>
     IPrincipal User { get; }
 }

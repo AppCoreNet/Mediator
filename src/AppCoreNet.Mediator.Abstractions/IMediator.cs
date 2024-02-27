@@ -21,10 +21,10 @@ public interface IMediator
     Task<TResponse> RequestAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Publishes an event.
+    /// Sends a notification.
     /// </summary>
-    /// <param name="event">The notification to publish.</param>
+    /// <param name="notification">The notification to publish.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-    /// <returns>A task that represents the asynchronous event operation.</returns>
-    Task PublishAsync(IEvent @event, CancellationToken cancellationToken = default);
+    /// <returns>A task that represents the asynchronous notification operation.</returns>
+    Task NotifyAsync(INotification notification, CancellationToken cancellationToken = default);
 }

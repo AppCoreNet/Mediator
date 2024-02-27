@@ -10,12 +10,12 @@ namespace AppCoreNet.Mediator.Pipeline;
 /// </summary>
 public sealed class RequestContextAccessor : IRequestContextAccessor
 {
-    private readonly AsyncLocal<IRequestContext?> _commandContext = new ();
+    private readonly AsyncLocal<IRequestContext?> _context = new ();
 
     /// <inheritdoc />
     public IRequestContext? CurrentContext
     {
-        get => _commandContext.Value;
-        set => _commandContext.Value = value;
+        get => _context.Value;
+        set => _context.Value = value;
     }
 }

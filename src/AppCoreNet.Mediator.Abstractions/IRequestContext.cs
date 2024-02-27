@@ -23,7 +23,7 @@ public interface IRequestContext
     IRequest<object> Request { get; }
 
     /// <summary>
-    /// Gets the command response.
+    /// Gets the request response.
     /// </summary>
     object? Response { get; }
 
@@ -55,7 +55,7 @@ public interface IRequestContext
     /// <summary>
     /// Completes the request with the specified response.
     /// </summary>
-    /// <param name="response">The command response.</param>
+    /// <param name="response">The request response.</param>
     void Complete(object response);
 
     /// <summary>

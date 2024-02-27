@@ -12,7 +12,7 @@ public interface IRequestPipelineFactory
     /// Resolves an <see cref="IRequestPipeline{TResponse}"/> for the specified <paramref name="request"/>.
     /// </summary>
     /// <param name="request">The request.</param>
-    /// <typeparam name="TResponse">The response of the command.</typeparam>
+    /// <typeparam name="TResponse">The response of the request.</typeparam>
     /// <returns>The <see cref="IRequestPipeline{TResponse}"/> instance.</returns>
     IRequestPipeline<TResponse> CreatePipeline<TResponse>(IRequest<TResponse> request);
 }

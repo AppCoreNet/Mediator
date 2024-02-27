@@ -20,7 +20,7 @@ public interface IRequestPipelineBehavior<TRequest, TResponse>
     /// <param name="context">The request context.</param>
     /// <param name="next">The behavior which should be invoked next.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-    /// <returns>A task that represents the asynchronous command operation.</returns>
+    /// <returns>A task that represents the asynchronous request operation.</returns>
     Task HandleAsync(
         IRequestContext<TRequest, TResponse> context,
         RequestPipelineDelegate<TRequest, TResponse> next,

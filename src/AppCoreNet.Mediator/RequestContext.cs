@@ -50,15 +50,15 @@ public class RequestContext<TRequest, TResponse> : IRequestContext<TRequest, TRe
     /// Initializes a new instance of the <see cref="RequestContext{TRequest,TResponse}"/> class.
     /// </summary>
     /// <param name="descriptor">The <see cref="RequestDescriptor"/>.</param>
-    /// <param name="command">The command that is being processed.</param>
-    public RequestContext(RequestDescriptor descriptor, TRequest command)
+    /// <param name="request">The request that is being processed.</param>
+    public RequestContext(RequestDescriptor descriptor, TRequest request)
     {
         Ensure.Arg.NotNull(descriptor);
         Ensure.Arg.OfType<TRequest>(descriptor.RequestType, nameof(descriptor));
-        Ensure.Arg.NotNull(command);
+        Ensure.Arg.NotNull(request);
 
         RequestDescriptor = descriptor;
-        Request = command;
+        Request = request;
     }
 
     void IRequestContext.Complete(object response)

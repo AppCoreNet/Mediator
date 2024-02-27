@@ -17,6 +17,6 @@ public interface IRequestPipeline<TResponse>
     /// </summary>
     /// <param name="request">The request.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-    /// <returns>A task that represents the asynchronous event operation.</returns>
+    /// <returns>A task that represents the asynchronous request operation.</returns>
     Task<TResponse> InvokeAsync(IRequest<TResponse> request, CancellationToken cancellationToken = default);
 }
