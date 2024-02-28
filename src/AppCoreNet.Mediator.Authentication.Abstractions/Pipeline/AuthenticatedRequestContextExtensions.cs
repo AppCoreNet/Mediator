@@ -3,9 +3,8 @@
 
 using System.Security.Principal;
 using AppCoreNet.Diagnostics;
-using AppCoreNet.Mediator.Pipeline;
 
-namespace AppCoreNet.Mediator;
+namespace AppCoreNet.Mediator.Pipeline;
 
 /// <summary>
 /// Provides authorization related extension methods for the <see cref="IRequestContext"/>.
