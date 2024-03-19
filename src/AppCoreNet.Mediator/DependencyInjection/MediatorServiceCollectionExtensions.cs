@@ -2,6 +2,7 @@
 // Copyright (c) The AppCore .NET project.
 
 using AppCoreNet.Diagnostics;
+using AppCoreNet.Extensions.DependencyInjection.Activator;
 using AppCoreNet.Mediator;
 using AppCoreNet.Mediator.Metadata;
 using AppCoreNet.Mediator.Pipeline;
@@ -24,6 +25,8 @@ public static class MediatorServiceCollectionExtensions
     public static IMediatorBuilder AddMediator(this IServiceCollection services)
     {
         Ensure.Arg.NotNull(services);
+
+        services.TryAddTransient<IActivator, ServiceProviderActivator>();
 
         services.TryAdd(
             new[]

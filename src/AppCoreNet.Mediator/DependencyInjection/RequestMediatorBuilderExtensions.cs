@@ -45,8 +45,10 @@ public static class RequestMediatorBuilderExtensions
         Ensure.Arg.NotNull(builder);
         Ensure.Arg.NotNull(handlerType);
 
+        Type serviceType = handlerType.GetClosedTypeOf(typeof(IRequestHandler<,>));
+
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Describe(typeof(IRequestHandler<,>), handlerType, lifetime));
+            ServiceDescriptor.Describe(serviceType, handlerType, lifetime));
 
         return builder;
     }
@@ -94,8 +96,10 @@ public static class RequestMediatorBuilderExtensions
         Ensure.Arg.NotNull(builder);
         Ensure.Arg.NotNull(handlerType);
 
+        Type serviceType = handlerType.GetClosedTypeOf(typeof(IPreRequestHandler<,>));
+
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Describe(typeof(IPreRequestHandler<,>), handlerType, lifetime));
+            ServiceDescriptor.Describe(serviceType, handlerType, lifetime));
 
         return builder;
     }
@@ -143,8 +147,10 @@ public static class RequestMediatorBuilderExtensions
         Ensure.Arg.NotNull(builder);
         Ensure.Arg.NotNull(handlerType);
 
+        Type serviceType = handlerType.GetClosedTypeOf(typeof(IPostRequestHandler<,>));
+
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Describe(typeof(IPostRequestHandler<,>), handlerType, lifetime));
+            ServiceDescriptor.Describe(serviceType, handlerType, lifetime));
 
         return builder;
     }

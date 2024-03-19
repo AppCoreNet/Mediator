@@ -44,8 +44,10 @@ public static class NotificationMediatorBuilderExtensions
         Ensure.Arg.NotNull(builder);
         Ensure.Arg.NotNull(handlerType);
 
+        Type serviceType = handlerType.GetClosedTypeOf(typeof(INotificationHandler<>));
+
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Describe(typeof(INotificationHandler<>), handlerType, lifetime));
+            ServiceDescriptor.Describe(serviceType, handlerType, lifetime));
 
         return builder;
     }
@@ -93,8 +95,10 @@ public static class NotificationMediatorBuilderExtensions
         Ensure.Arg.NotNull(builder);
         Ensure.Arg.NotNull(handlerType);
 
+        Type serviceType = handlerType.GetClosedTypeOf(typeof(IPreNotificationHandler<>));
+
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Describe(typeof(IPreNotificationHandler<>), handlerType, lifetime));
+            ServiceDescriptor.Describe(serviceType, handlerType, lifetime));
 
         return builder;
     }
@@ -142,8 +146,10 @@ public static class NotificationMediatorBuilderExtensions
         Ensure.Arg.NotNull(builder);
         Ensure.Arg.NotNull(handlerType);
 
+        Type serviceType = handlerType.GetClosedTypeOf(typeof(IPostNotificationHandler<>));
+
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Describe(typeof(IPostNotificationHandler<>), handlerType, lifetime));
+            ServiceDescriptor.Describe(serviceType, handlerType, lifetime));
 
         return builder;
     }
