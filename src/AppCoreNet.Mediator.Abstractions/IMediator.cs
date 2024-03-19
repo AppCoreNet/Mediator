@@ -18,13 +18,13 @@ public interface IMediator
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <typeparam name="TResponse">The type of the response.</typeparam>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task<TResponse> RequestAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default);
+    Task<TResponse> ProcessAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Sends a notification.
+    /// Publishes a notification.
     /// </summary>
     /// <param name="notification">The notification to publish.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous notification operation.</returns>
-    Task NotifyAsync(INotification notification, CancellationToken cancellationToken = default);
+    Task PublishAsync(INotification notification, CancellationToken cancellationToken = default);
 }

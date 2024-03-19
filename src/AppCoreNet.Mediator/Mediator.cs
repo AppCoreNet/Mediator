@@ -35,7 +35,7 @@ public class Mediator : IMediator
     }
 
     /// <inheritdoc />
-    public async Task<TResponse> RequestAsync<TResponse>(
+    public async Task<TResponse> ProcessAsync<TResponse>(
         IRequest<TResponse> request,
         CancellationToken cancellationToken = default)
     {
@@ -47,7 +47,7 @@ public class Mediator : IMediator
     }
 
     /// <inheritdoc />
-    public async Task NotifyAsync(INotification notification, CancellationToken cancellationToken = default)
+    public async Task PublishAsync(INotification notification, CancellationToken cancellationToken = default)
     {
         Ensure.Arg.NotNull(notification);
 
