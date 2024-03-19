@@ -12,7 +12,7 @@ public interface IRequest<out TResponse>
 }
 
 /// <summary>
-/// Represents a request without a result.
+/// Represents a request without a response.
 /// </summary>
 public interface IRequest : IRequest<VoidResponse>
 {

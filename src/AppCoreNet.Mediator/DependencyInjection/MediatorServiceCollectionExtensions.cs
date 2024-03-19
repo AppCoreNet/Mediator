@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.Extensions.DependencyInjection;
+namespace AppCoreNet.Extensions.DependencyInjection;
 
 /// <summary>
 /// Provides extension methods to configure the <see cref="IMediatorBuilder"/>.
@@ -32,7 +32,7 @@ public static class MediatorServiceCollectionExtensions
                 ServiceDescriptor.Transient<IRequestPipelineFactory, RequestPipelineFactory>(),
                 ServiceDescriptor.Singleton<INotificationDescriptorFactory, NotificationDescriptorFactory>(),
                 ServiceDescriptor.Transient<INotificationPipelineFactory, NotificationPipelineFactory>(),
-                ServiceDescriptor.Transient<IMediator, Mediator>(),
+                ServiceDescriptor.Transient<IMediator, Mediator.Mediator>(),
             });
 
         services.TryAddEnumerable(

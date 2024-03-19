@@ -3,14 +3,13 @@
 
 using System;
 using AppCoreNet.Diagnostics;
-using AppCoreNet.Extensions.DependencyInjection;
 using AppCoreNet.Mediator;
 using AppCoreNet.Mediator.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.Extensions.DependencyInjection;
+namespace AppCoreNet.Extensions.DependencyInjection;
 
 /// <summary>
 /// Provides extension methods to register notification handlers and behaviors.
