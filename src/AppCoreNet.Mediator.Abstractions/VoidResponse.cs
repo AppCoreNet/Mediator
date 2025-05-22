@@ -23,7 +23,7 @@ public sealed class VoidResponse : IEquatable<VoidResponse>
     /// <inheritdoc />
     public bool Equals(VoidResponse? other)
     {
-        return true;
+        return !ReferenceEquals(other, null);
     }
 
     /// <inheritdoc />
