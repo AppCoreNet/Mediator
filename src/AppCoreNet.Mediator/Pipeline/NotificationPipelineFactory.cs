@@ -14,7 +14,7 @@ namespace AppCoreNet.Mediator.Pipeline;
 public sealed class NotificationPipelineFactory : INotificationPipelineFactory
 {
     private static readonly Type _pipelineType = typeof(NotificationPipeline<>);
-    private static readonly ConcurrentDictionary<Type, Type> _pipelineTypes = new ();
+    private static readonly ConcurrentDictionary<Type, Type> _pipelineTypes = new();
 
     private readonly IActivator _activator;
 
@@ -33,6 +33,6 @@ public sealed class NotificationPipelineFactory : INotificationPipelineFactory
     {
         Ensure.Arg.NotNull(notification);
         Type pipelineType = _pipelineTypes.GetOrAdd(notification.GetType(), key => _pipelineType.MakeGenericType(key));
-        return (INotificationPipeline)_activator.CreateInstance(pipelineType) !;
+        return (INotificationPipeline)_activator.CreateInstance(pipelineType)!;
     }
 }

@@ -19,7 +19,7 @@ public static class AuthenticatedRequestContextExtensions
     public static bool IsAuthenticated(this IRequestContext context)
     {
         Ensure.Arg.NotNull(context);
-        return context.User().Identity.IsAuthenticated;
+        return (context.User().Identity?.IsAuthenticated).GetValueOrDefault();
     }
 
     /// <summary>

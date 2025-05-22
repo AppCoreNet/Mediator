@@ -15,7 +15,7 @@ public sealed class RequestPipelineFactory : IRequestPipelineFactory
 {
     private readonly IActivator _activator;
     private static readonly Type _pipelineType = typeof(RequestPipeline<,>);
-    private static readonly ConcurrentDictionary<Type, Type> _pipelineTypes = new ();
+    private static readonly ConcurrentDictionary<Type, Type> _pipelineTypes = new();
 
     private static Type GetRequestPipelineType(Type requestType)
     {
@@ -41,6 +41,6 @@ public sealed class RequestPipelineFactory : IRequestPipelineFactory
     {
         Ensure.Arg.NotNull(request);
         Type pipelineType = GetRequestPipelineType(request.GetType());
-        return (IRequestPipeline<TResponse>)_activator.CreateInstance(pipelineType) !;
+        return (IRequestPipeline<TResponse>)_activator.CreateInstance(pipelineType)!;
     }
 }

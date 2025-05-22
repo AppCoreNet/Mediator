@@ -30,7 +30,7 @@ public class RequestDescriptor
     public RequestDescriptor(Type requestType, IReadOnlyDictionary<string, object> metadata)
     {
         Ensure.Arg.NotNull(requestType);
-        Ensure.Arg.OfType(requestType, typeof(IRequest<>));
+        Ensure.Arg.OfGenericType(requestType, typeof(IRequest<>));
         Ensure.Arg.NotNull(metadata);
 
         RequestType = requestType;

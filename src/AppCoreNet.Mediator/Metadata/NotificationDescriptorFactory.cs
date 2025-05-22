@@ -14,7 +14,7 @@ namespace AppCoreNet.Mediator.Metadata;
 /// </summary>
 public class NotificationDescriptorFactory : INotificationDescriptorFactory
 {
-    private readonly ConcurrentDictionary<Type, IReadOnlyDictionary<string, object>> _metadataCache = new ();
+    private readonly ConcurrentDictionary<Type, IReadOnlyDictionary<string, object>> _metadataCache = new();
     private readonly IEnumerable<INotificationMetadataProvider> _metadataProviders;
 
     /// <summary>

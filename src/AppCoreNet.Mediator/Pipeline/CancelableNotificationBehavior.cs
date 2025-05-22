@@ -7,11 +7,6 @@ using AppCoreNet.Mediator.Metadata;
 
 namespace AppCoreNet.Mediator.Pipeline;
 
-internal static class CancelableNotificationBehavior
-{
-    internal const string IsCancelableMetadataKey = "IsCancelable";
-}
-
 /// <summary>
 /// Implements cancellation support for notifications. The notification must be decorated with the
 /// <see cref="CancelableAttribute"/>.
@@ -27,7 +22,7 @@ public class CancelableNotificationBehavior<TNotification> : INotificationPipeli
         CancellationToken cancellationToken = default)
     {
         bool isCancelable = context.NotificationDescriptor.GetMetadata(
-            CancelableNotificationBehavior.IsCancelableMetadataKey,
+            MetadataKeys.IsCancelable,
             false);
 
         CancellationTokenSource? cts = null;

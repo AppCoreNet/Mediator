@@ -7,11 +7,6 @@ using AppCoreNet.Mediator.Metadata;
 
 namespace AppCoreNet.Mediator.Pipeline;
 
-internal static class CancelableRequestBehavior
-{
-    internal const string IsCancelableMetadataKey = "IsCancelable";
-}
-
 /// <summary>
 /// Implements cancellation support for request. The request must be decorated with the
 /// <see cref="CancelableAttribute"/>.
@@ -28,7 +23,7 @@ public class CancelableRequestBehavior<TRequest, TResponse> : IRequestPipelineBe
         CancellationToken cancellationToken = default)
     {
         bool isCancelable = context.RequestDescriptor.GetMetadata(
-            CancelableRequestBehavior.IsCancelableMetadataKey,
+            MetadataKeys.IsCancelable,
             false);
 
         CancellationTokenSource? cts = null;

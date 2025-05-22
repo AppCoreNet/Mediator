@@ -20,7 +20,7 @@ public class CancelableRequestMetadataProviderTests
 
         metadata.Should()
                 .Contain(
-                    new KeyValuePair<string, object>(CancelableRequestBehavior.IsCancelableMetadataKey, true));
+                    new KeyValuePair<string, object>(MetadataKeys.IsCancelable, true));
     }
 
     [Fact]
@@ -33,6 +33,6 @@ public class CancelableRequestMetadataProviderTests
 
         metadata.Should()
                 .NotContain(
-                    new KeyValuePair<string, object>(CancelableRequestBehavior.IsCancelableMetadataKey, true));
+                    new KeyValuePair<string, object>(MetadataKeys.IsCancelable, true));
     }
 }

@@ -14,7 +14,7 @@ namespace AppCoreNet.Mediator.Metadata;
 /// </summary>
 public class RequestDescriptorFactory : IRequestDescriptorFactory
 {
-    private readonly ConcurrentDictionary<Type, IReadOnlyDictionary<string, object>> _metadataCache = new ();
+    private readonly ConcurrentDictionary<Type, IReadOnlyDictionary<string, object>> _metadataCache = new();
     private readonly IEnumerable<IRequestMetadataProvider> _metadataProviders;
 
     /// <summary>
@@ -47,7 +47,7 @@ public class RequestDescriptorFactory : IRequestDescriptorFactory
     public RequestDescriptor CreateDescriptor(Type requestType)
     {
         Ensure.Arg.NotNull(requestType);
-        Ensure.Arg.OfType(requestType, typeof(IRequest<>));
+        Ensure.Arg.OfGenericType(requestType, typeof(IRequest<>));
 
         return new RequestDescriptor(requestType, GetMetadata(requestType));
     }

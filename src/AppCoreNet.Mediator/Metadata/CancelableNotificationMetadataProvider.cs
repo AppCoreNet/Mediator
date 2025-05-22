@@ -20,6 +20,6 @@ public class CancelableNotificationMetadataProvider : INotificationMetadataProvi
                                      .GetCustomAttribute<CancelableAttribute>() != null;
 
         if (isCancelable)
-            metadata.Add(CancelableNotificationBehavior.IsCancelableMetadataKey, true);
+            metadata.Add(MetadataKeys.IsCancelable, true);
     }
 }
