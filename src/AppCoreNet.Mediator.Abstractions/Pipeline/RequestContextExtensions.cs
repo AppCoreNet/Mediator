@@ -44,7 +44,7 @@ public static class RequestContextExtensions
     {
         Ensure.Arg.NotNull(context);
 
-        if (!context.Features.TryGetValue(typeof(T), out object feature))
+        if (!context.Features.TryGetValue(typeof(T), out object? feature))
             throw new InvalidOperationException($"Request context feature {typeof(T).GetDisplayName()} is not available.");
 
         return (T)feature;

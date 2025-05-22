@@ -20,7 +20,7 @@ public class CancelableNotificationMetadataProviderTests
 
         metadata.Should()
                 .Contain(
-                    new KeyValuePair<string, object>(CancelableNotificationBehavior.IsCancelableMetadataKey, true));
+                    new KeyValuePair<string, object>(MetadataKeys.IsCancelable, true));
     }
 
     [Fact]
@@ -33,6 +33,6 @@ public class CancelableNotificationMetadataProviderTests
 
         metadata.Should()
                 .NotContain(
-                    new KeyValuePair<string, object>(CancelableNotificationBehavior.IsCancelableMetadataKey, true));
+                    new KeyValuePair<string, object>(MetadataKeys.IsCancelable, true));
     }
 }

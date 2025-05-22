@@ -20,6 +20,6 @@ public class CancelableRequestMetadataProvider : IRequestMetadataProvider
                                        .GetCustomAttribute<CancelableAttribute>() != null;
 
         if (isCancelable)
-            metadata.Add(CancelableRequestBehavior.IsCancelableMetadataKey, true);
+            metadata.Add(MetadataKeys.IsCancelable, true);
     }
 }

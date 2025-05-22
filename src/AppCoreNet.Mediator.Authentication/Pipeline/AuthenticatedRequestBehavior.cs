@@ -12,11 +12,6 @@ using AppCoreNet.Mediator.Metadata;
 
 namespace AppCoreNet.Mediator.Pipeline;
 
-internal class AuthenticatedRequestBehavior
-{
-    internal const string IsAuthorizedMetadataKey = "IsAuthorized";
-}
-
 /// <summary>
 /// Implements authentication support for request. The request must be decorated with the
 /// <see cref="AuthorizeAttribute"/>. The current user is obtained using implementations
@@ -55,7 +50,7 @@ public class AuthenticatedRequestBehavior<TRequest, TResponse> : IRequestPipelin
         {
             bool isAuthorized =
                 context.RequestDescriptor.GetMetadata(
-                    AuthenticatedRequestBehavior.IsAuthorizedMetadataKey,
+                    MetadataKeys.IsAuthorized,
                     false);
 
             if (isAuthorized && !context.IsAuthenticated())

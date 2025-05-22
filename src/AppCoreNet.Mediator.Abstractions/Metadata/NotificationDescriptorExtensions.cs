@@ -26,7 +26,7 @@ public static class NotificationDescriptorExtensions
         Ensure.Arg.NotNull(descriptor);
         Ensure.Arg.NotEmpty(key);
 
-        if (!descriptor.Metadata.TryGetValue(key, out object tmp))
+        if (!descriptor.Metadata.TryGetValue(key, out object? tmp))
         {
             value = default;
             return false;

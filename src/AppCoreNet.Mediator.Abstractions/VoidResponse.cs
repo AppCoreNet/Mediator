@@ -14,14 +14,14 @@ public sealed class VoidResponse : IEquatable<VoidResponse>
     /// <summary>
     /// Gets the singleton instance of <see cref="VoidResponse"/>.
     /// </summary>
-    public static readonly VoidResponse Instance = new ();
+    public static readonly VoidResponse Instance = new();
 
     private VoidResponse()
     {
     }
 
     /// <inheritdoc />
-    public bool Equals(VoidResponse other)
+    public bool Equals(VoidResponse? other)
     {
         return true;
     }

@@ -10,7 +10,7 @@ namespace AppCoreNet.Mediator.Pipeline;
 /// </summary>
 public sealed class NotificationContextAccessor : INotificationContextAccessor
 {
-    private readonly AsyncLocal<INotificationContext?> _context = new ();
+    private readonly AsyncLocal<INotificationContext?> _context = new();
 
     /// <inheritdoc />
     public INotificationContext? CurrentContext

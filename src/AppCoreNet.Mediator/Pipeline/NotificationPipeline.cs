@@ -79,7 +79,8 @@ public sealed class NotificationPipeline<TNotification> : INotificationPipeline
     private async Task InvokeAsync(INotificationContext<TNotification> context, CancellationToken cancellationToken)
     {
         bool handlerInvoked = false;
-        async Task Handler(INotificationContext<TNotification> c, CancellationToken ct)
+
+        async Task HandlerAsync(INotificationContext<TNotification> c, CancellationToken ct)
         {
             handlerInvoked = true;
             foreach (INotificationHandler<TNotification> handler in _handlers)
@@ -99,7 +100,7 @@ public sealed class NotificationPipeline<TNotification> : INotificationPipeline
             await ((IEnumerable<INotificationPipelineBehavior<TNotification>>)_behaviors)
                   .Reverse()
                   .Aggregate(
-                      (NotificationPipelineDelegate<TNotification>)Handler,
+                      (NotificationPipelineDelegate<TNotification>)HandlerAsync,
                       (next, behavior) => async (e, ct) =>
                       {
                           _logger.InvokingNotificationBehavior(typeof(TNotification), behavior.GetType());
@@ -120,7 +121,7 @@ public sealed class NotificationPipeline<TNotification> : INotificationPipeline
             }
             else
             {
-                _logger.NotificationShortCircuited(typeof(TNotification), current?.GetType(), stopwatch.Elapsed);
+                _logger.NotificationShortCircuited(typeof(TNotification), current!.GetType(), stopwatch.Elapsed);
             }
         }
         catch (Exception error)

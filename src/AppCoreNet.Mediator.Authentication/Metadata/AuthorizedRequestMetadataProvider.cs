@@ -20,6 +20,6 @@ public class AuthorizedRequestMetadataProvider : IRequestMetadataProvider
                                                  .GetCustomAttribute<AuthorizeAttribute>() != null;
 
         if (requiresAuthentication)
-            metadata.Add(AuthenticatedRequestBehavior.IsAuthorizedMetadataKey, true);
+            metadata.Add(MetadataKeys.IsAuthorized, true);
     }
 }

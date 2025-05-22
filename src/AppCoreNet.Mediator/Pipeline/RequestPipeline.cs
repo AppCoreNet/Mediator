@@ -137,7 +137,7 @@ public sealed class RequestPipeline<TRequest, TResponse> : IRequestPipeline<TRes
         }
         else
         {
-            _logger.RequestShortCircuited(typeof(TRequest), current?.GetType(), stopwatch.Elapsed);
+            _logger.RequestShortCircuited(typeof(TRequest), current!.GetType(), stopwatch.Elapsed);
         }
 
         return context.Response!;
