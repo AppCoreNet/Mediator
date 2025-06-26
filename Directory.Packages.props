@@ -22,7 +22,7 @@
     <PackageVersion Include="AppCoreNet.TypeHelpers.Sources" Version="0.7.0" />
     <PackageVersion Include="JetBrains.Annotations" Version="2024.3.0" />
 
-    <PackageVersion Include="AppCoreNet.Extensions.DependencyInjection.Abstractions" Version="0.6.3" />
+    <PackageVersion Include="AppCoreNet.Extensions.DependencyInjection.Abstractions" Version="0.7.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.3" />
   </ItemGroup>
 </Project>
